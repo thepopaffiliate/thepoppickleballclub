@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GearFinderRouteImport } from './routes/gear-finder'
+import { Route as GearIndexRouteImport } from './routes/gear.index'
+import { Route as GearSlugRouteImport } from './routes/gear.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GearFinderRoute = GearFinderRouteImport.update({
+  id: '/gear-finder',
+  path: '/gear-finder',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GearIndexRoute = GearIndexRouteImport.update({
+  id: '/gear/',
+  path: '/gear/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GearSlugRoute = GearSlugRouteImport.update({
+  id: '/gear/$slug',
+  path: '/gear/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/gear-finder': typeof GearFinderRoute
+  '/gear/$slug': typeof GearSlugRoute
+  '/gear/': typeof GearIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/gear-finder': typeof GearFinderRoute
+  '/gear/$slug': typeof GearSlugRoute
+  '/gear': typeof GearIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/gear-finder': typeof GearFinderRoute
+  '/gear/$slug': typeof GearSlugRoute
+  '/gear/': typeof GearIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/gear-finder' | '/gear/$slug' | '/gear/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/gear-finder' | '/gear/$slug' | '/gear'
+  id: '__root__' | '/' | '/gear-finder' | '/gear/$slug' | '/gear/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GearFinderRoute: typeof GearFinderRoute
+  GearSlugRoute: typeof GearSlugRoute
+  GearIndexRoute: typeof GearIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gear-finder': {
+      id: '/gear-finder'
+      path: '/gear-finder'
+      fullPath: '/gear-finder'
+      preLoaderRoute: typeof GearFinderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gear/': {
+      id: '/gear/'
+      path: '/gear'
+      fullPath: '/gear/'
+      preLoaderRoute: typeof GearIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gear/$slug': {
+      id: '/gear/$slug'
+      path: '/gear/$slug'
+      fullPath: '/gear/$slug'
+      preLoaderRoute: typeof GearSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GearFinderRoute: GearFinderRoute,
+  GearSlugRoute: GearSlugRoute,
+  GearIndexRoute: GearIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
