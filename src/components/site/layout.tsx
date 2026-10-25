@@ -121,7 +121,7 @@ export function SiteFooter() {
 
 export interface Crumb {
   label: string;
-  to?: string;
+  to?: "/gear" | "/stories" | "/news";
 }
 
 export function Breadcrumbs({ items }: { items: Crumb[] }) {
@@ -133,7 +133,7 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
           <li key={i} className="flex items-center gap-1">
             <ChevronRight className="size-3" aria-hidden />
             {c.to ? (
-              <a href={c.to} className="hover:text-foreground">{c.label}</a>
+              <Link to={c.to} className="hover:text-foreground">{c.label}</Link>
             ) : (
               <span aria-current="page" className="text-foreground line-clamp-1">{c.label}</span>
             )}

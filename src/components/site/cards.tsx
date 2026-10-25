@@ -109,7 +109,7 @@ export function StoryCard({ s }: { s: Story }) {
           <DemoBadge status={s.status} />
         </div>
         <h3 className="font-ui text-lg font-bold leading-snug">
-          <Link to="/stories/$slug" params={{ slug: s.slug }} className="after:absolute hover:text-primary-strong">
+          <Link to="/stories/$slug" params={{ slug: s.slug }} className="hover:text-primary-strong">
             {s.title}
           </Link>
         </h3>
