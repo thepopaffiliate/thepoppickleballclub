@@ -4,28 +4,19 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
- */
+/* The Pop. design system — brand palette mapped to semantic tokens (oklch). */
 
 @theme inline {
+  --font-display: "Bebas Neue", "Impact", "Arial Narrow", sans-serif;
+  --font-ui: "Montserrat", "Segoe UI", system-ui, sans-serif;
+  --font-sans: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -34,111 +25,178 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-strong: var(--primary-strong);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-value: var(--value);
+  --color-value-strong: var(--value-strong);
+  --color-value-foreground: var(--value-foreground);
+  --color-night: var(--night);
+  --color-night-foreground: var(--night-foreground);
+  --color-blush: var(--blush);
+  --color-fog: var(--fog);
+  --color-ice: var(--ice);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-ring-offset-background: var(--background);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0.875rem;
+  /* Brand: Rally Pink #F2547D, Court Green #5DBE75, Night Court #1A1A2E,
+     Blush #FFF0F5, Court Fog #8898A8, White, Ice Court #F0F4F8 */
+  --rally-pink: oklch(0.67 0.19 6);
+  --court-green: oklch(0.72 0.14 148);
+  --night-court: oklch(0.21 0.04 285);
+  --blush-raw: oklch(0.97 0.02 350);
+  --fog-raw: oklch(0.65 0.03 245);
+  --ice-raw: oklch(0.96 0.008 250);
+
   --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --foreground: var(--night-court);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
+  --card-foreground: var(--night-court);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --popover-foreground: var(--night-court);
+  --primary: var(--rally-pink);
+  --primary-strong: oklch(0.55 0.2 6); /* AA-contrast pink for text on white */
+  --primary-foreground: var(--night-court);
+  --secondary: var(--ice-raw);
+  --secondary-foreground: var(--night-court);
+  --muted: var(--ice-raw);
+  --muted-foreground: oklch(0.46 0.03 255);
+  --accent: var(--blush-raw);
+  --accent-foreground: var(--night-court);
+  --value: var(--court-green);
+  --value-strong: oklch(0.47 0.12 148);
+  --value-foreground: var(--night-court);
+  --night: var(--night-court);
+  --night-foreground: oklch(0.98 0.005 250);
+  --blush: var(--blush-raw);
+  --fog: var(--fog-raw);
+  --ice: var(--ice-raw);
+  --warning: oklch(0.95 0.06 85);
+  --warning-foreground: oklch(0.38 0.08 65);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
-}
+  --border: oklch(0.91 0.012 250);
+  --input: oklch(0.88 0.015 250);
+  --ring: var(--rally-pink);
 
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  --shadow-card: 0 1px 2px color-mix(in oklab, var(--night-court) 6%, transparent),
+    0 12px 32px -16px color-mix(in oklab, var(--night-court) 22%, transparent);
+  --gradient-night: linear-gradient(160deg, var(--night-court), oklch(0.28 0.06 300));
 }
 
 @layer base {
   * {
     border-color: var(--color-border);
   }
-
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+  }
+  h1, h2, h3 {
+    line-height: 1.05;
+  }
+  :focus-visible {
+    outline: 3px solid var(--rally-pink);
+    outline-offset: 2px;
+    border-radius: 6px;
   }
 }
+
+@utility font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+  font-weight: 400;
+}
+@utility font-ui {
+  font-family: var(--font-ui);
+}
+@utility shadow-card {
+  box-shadow: var(--shadow-card);
+}
+@utility bg-night-gradient {
+  background: var(--gradient-night);
+}
+@utility container-page {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@utility eyebrow {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: background-color 150ms, color 150ms, border-color 150ms;
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+@utility btn-primary {
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  &:hover {
+    background: color-mix(in oklab, var(--color-primary) 85%, white);
+  }
+}
+@utility btn-outline {
+  border: 2px solid currentColor;
+  &:hover {
+    background: color-mix(in oklab, currentColor 8%, transparent);
+  }
+}
+@utility btn-night {
+  background: var(--color-night);
+  color: var(--color-night-foreground);
+  &:hover {
+    background: color-mix(in oklab, var(--color-night) 85%, white);
+  }
+}
+@utility chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.72rem;
+}
+
+.prose-pop h2 { font-family: var(--font-display); font-size: 2rem; margin: 2rem 0 0.75rem; }
+.prose-pop h3 { font-family: var(--font-ui); font-weight: 700; font-size: 1.15rem; margin: 1.5rem 0 0.5rem; }
+.prose-pop p { margin: 0 0 1rem; }
+.prose-pop ul { list-style: disc; padding-left: 1.25rem; margin: 0 0 1rem; }
+.prose-pop ol { list-style: decimal; padding-left: 1.25rem; margin: 0 0 1rem; }
+.prose-pop li { margin-bottom: 0.35rem; }
