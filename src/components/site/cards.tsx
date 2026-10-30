@@ -114,8 +114,8 @@ export function ProductEvidence({ g }: { g: Gear }) {
       <p className="font-semibold">{getReviewLabel(g)}</p>
       {g.intendedUser && <p>Intended user: {g.intendedUser}</p>}
       {g.verifiedSpecs?.length ? <dl>{g.verifiedSpecs.map((s) => <div key={s.label}><dt className="inline font-semibold">{s.label}: </dt><dd className="inline">{s.value}</dd></div>)}</dl> : null}
-      {g.pros.length > 0 && <p>Strengths: {g.pros.join("; ")}</p>}
-      {g.cons.length > 0 && <p>Limitations: {g.cons.join("; ")}</p>}
+      {g.pros.length > 0 && <p>Strengths{g.status === "demo" ? " (placeholder)" : ""}: {g.pros.join("; ")}</p>}
+      {g.cons.length > 0 && <p>Limitations{g.status === "demo" ? " (placeholder)" : ""}: {g.cons.join("; ")}</p>}
     </div>
   );
 }
