@@ -3,7 +3,7 @@
 
 export type ContentStatus = "published" | "demo" | "draft";
 
-export type GearCategory = "paddle" | "starter-set" | "balls-accessories" | "bags-apparel";
+export type GearCategory = "paddle" | "balls" | "shoes" | "bags" | "accessories" | "starter-set";
 export type BudgetTier = "under-500" | "500-800" | "800-1500" | "1500-plus";
 export type ExperienceLevel = "beginner" | "casual" | "regular";
 export type UseCase = "value" | "comfort-control" | "durability" | "starter-friendly";
@@ -12,15 +12,21 @@ export interface Gear {
   id: string;
   slug: string;
   name: string;
-  category: GearCategory;
-  pricePHP: number;
+  /** Apparel is retained only for the existing legacy placeholder. */
+  category: GearCategory | "apparel";
+  pricePHP?: number | null;
   /** ISO date the listed price was last checked by an editor. */
-  priceCheckedAt: string;
+  priceCheckedAt?: string;
   description: string;
   experienceLevel: ExperienceLevel[];
   budgetTier: BudgetTier;
   useCases: UseCase[];
   listedSpecs: { label: string; value: string }[];
+  /** Only populate after editorial verification; listedSpecs alone are not verified. */
+  verifiedSpecs?: { label: string; value: string }[];
+  intendedUser?: string;
+  reviewStatus?: "not-reviewed" | "researched" | "tested";
+  reviewNote?: string;
   /** Editor-entered only. Leave empty if not reviewed. */
   pros: string[];
   cons: string[];
@@ -30,6 +36,8 @@ export interface Gear {
   sourceUrl: string;
   /** Affiliate URL exactly as issued. Never modified. Empty = not set. */
   shopeeAffiliateUrl: string;
+  /** Exact issued URLs per placement/channel. Never transform these strings. */
+  affiliateDestinations?: Partial<Record<string, string>>;
   featured: boolean;
   status: ContentStatus;
   createdAt: string;
@@ -39,6 +47,7 @@ export interface Gear {
 export type StoryCategory =
   | "Beginner Tips"
   | "Gear Guides"
+  | "Buying Guides"
   | "Product Comparisons"
   | "Court Lifestyle"
   | "Filipino Pickleball";

@@ -1,4 +1,5 @@
-import type { BudgetTier, ExperienceLevel, Gear, GearCategory, UseCase } from "./types";
+import type { ExperienceLevel, Gear, UseCase } from "./types";
+import { gearFinderConfig } from "./gear-config";
 import flatlay from "@/assets/gear-flatlay.jpg";
 
 /*
@@ -83,7 +84,7 @@ export const gear: Gear[] = [
     id: "g4",
     slug: "demo-outdoor-balls-6-pack",
     name: "Demo Outdoor Balls (6-pack)",
-    category: "balls-accessories",
+    category: "balls",
     pricePHP: 299,
     priceCheckedAt: "2026-10-23",
     description: "Sample entry: a pack of outdoor balls. Placeholder data only.",
@@ -100,7 +101,7 @@ export const gear: Gear[] = [
     id: "g5",
     slug: "demo-overgrip-3-pack",
     name: "Demo Overgrip (3-pack)",
-    category: "balls-accessories",
+    category: "accessories",
     pricePHP: 189,
     priceCheckedAt: "2026-10-18",
     description: "Sample entry: replacement overgrips. Placeholder data only.",
@@ -117,7 +118,7 @@ export const gear: Gear[] = [
     id: "g6",
     slug: "demo-paddle-sling-bag",
     name: "Demo Paddle Sling Bag",
-    category: "bags-apparel",
+    category: "bags",
     pricePHP: 650,
     priceCheckedAt: "2026-10-10",
     description: "Sample entry: a sling bag that fits two paddles. Placeholder data only.",
@@ -134,7 +135,7 @@ export const gear: Gear[] = [
     id: "g7",
     slug: "demo-dri-fit-court-shirt",
     name: "Demo Quick-Dry Court Shirt",
-    category: "bags-apparel",
+    category: "apparel",
     pricePHP: 399,
     priceCheckedAt: "2026-08-30",
     description: "Sample entry: a lightweight sports shirt. Placeholder data only.",
@@ -167,18 +168,14 @@ export const gear: Gear[] = [
 
 export const visibleGear = gear.filter((g) => g.status !== "draft");
 
-export const categoryLabels: Record<GearCategory, string> = {
-  paddle: "Paddle",
-  "starter-set": "Starter set",
-  "balls-accessories": "Balls & accessories",
-  "bags-apparel": "Bags & apparel",
-};
-
-export const budgetLabels: Record<BudgetTier, string> = {
-  "under-500": "Under ₱500",
-  "500-800": "₱500–₱800",
-  "800-1500": "₱800–₱1,500",
-  "1500-plus": "₱1,500+",
+export const categoryLabels: Record<Gear["category"], string> = {
+  paddle: gearFinderConfig.paddle.label,
+  balls: gearFinderConfig.balls.label,
+  shoes: gearFinderConfig.shoes.label,
+  bags: gearFinderConfig.bags.label,
+  accessories: gearFinderConfig.accessories.label,
+  "starter-set": gearFinderConfig["starter-set"].label,
+  apparel: "Apparel (placeholder)",
 };
 
 export const experienceLabels: Record<ExperienceLevel, string> = {
@@ -195,4 +192,4 @@ export const useCaseLabels: Record<UseCase, string> = {
 };
 
 export const getGearBySlug = (slug: string) => visibleGear.find((g) => g.slug === slug);
-export const getGearByIds = (ids: string[]) => visibleGear.filter((g) => ids.includes(g.id));
+export const getGearByIds = (ids: string[]) => visibleGear.filter((g) => g.status === "published" && ids.includes(g.id));
