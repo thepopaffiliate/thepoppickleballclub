@@ -6,8 +6,8 @@ import { pageMeta } from "@/lib/seo";
 import type { StoryCategory } from "@/content/types";
 
 export const Route = createFileRoute("/stories/")({
-  validateSearch: (s: Record<string, unknown>): { category?: StoryCategory } => ({
-    category: storyCategories.includes(s.category as StoryCategory) ? s.category as StoryCategory : undefined,
+  validateSearch: (s: Record<string, unknown>): { category?: StoryCategory | undefined } => ({
+    category: storyCategories.includes(s["category"] as StoryCategory) ? s["category"] as StoryCategory : undefined,
   }),
   head: () => pageMeta({ title: "Latest Reads", description: "Buying guides, product comparisons, beginner tips and Filipino pickleball culture.", path: "/stories" }),
   component: LatestReads,

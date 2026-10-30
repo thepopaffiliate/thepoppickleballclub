@@ -12,20 +12,20 @@ import { Button } from "@/components/ui/button";
 
 type Sort = "price-asc" | "price-desc" | "checked";
 interface GearSearch {
-  q?: string;
-  category?: GearCategory | "apparel";
-  budget?: BudgetTier;
-  sort?: Sort;
+  q?: string | undefined;
+  category?: GearCategory | "apparel" | undefined;
+  budget?: BudgetTier | undefined;
+  sort?: Sort | undefined;
 }
 
 const pick = <T extends string>(v: unknown, allowed: readonly T[]) => (allowed.includes(v as T) ? (v as T) : undefined);
 
 export const Route = createFileRoute("/gear/")({
   validateSearch: (s: Record<string, unknown>): GearSearch => ({
-    q: typeof s.q === "string" && s.q ? s.q : undefined,
-    category: pick(s.category, Object.keys(categoryLabels) as (GearCategory | "apparel")[]),
-    budget: pick(s.budget, gearFinderConfig.paddle.budgets.map((b) => b.id)),
-    sort: pick(s.sort, ["price-asc", "price-desc", "checked"] as const),
+    q: typeof s["q"] === "string" && s["q"] ? s["q"] : undefined,
+    category: pick(s["category"], Object.keys(categoryLabels) as (GearCategory | "apparel")[]),
+    budget: pick(s["budget"], gearFinderConfig.paddle.budgets.map((b) => b.id)),
+    sort: pick(s["sort"], ["price-asc", "price-desc", "checked"] as const),
   }),
   head: () =>
     pageMeta({
@@ -48,7 +48,7 @@ function GearDirectory() {
     const list = visibleGear.filter(
       (g) =>
         (!search.category || g.category === search.category) &&
-        (!search.budget || (g.category !== "apparel" && (() => { const b = getBudgetOption(g.category, search.budget); return b ? fitsBudget(g, b) : false; })())) &&
+        (!search.budget || (g.category !== "apparel" && (() => { const b = getBudgetOption(g.category, search.budget as BudgetTier); return b ? fitsBudget(g, b) : false; })())) &&
         (!q || `${g.name} ${g.description}`.toLowerCase().includes(q)),
     );
     const sort = search.sort ?? "price-asc";

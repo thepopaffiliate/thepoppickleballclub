@@ -38,7 +38,7 @@ describe("Gear Finder", () => {
 
   it("uses each category's independent bounds, not the legacy universal tier", () => {
     const original = gearFinderConfig.paddle;
-    gearFinderConfig.paddle = { ...original, budgets: [{ ...original.budgets[0], maxPHP: 400 }, ...original.budgets.slice(1)] as typeof original.budgets };
+    gearFinderConfig.paddle = { ...original, budgets: [{ ...original.budgets[0], maxPHP: 400 }, original.budgets[1], original.budgets[2], original.budgets[3]] };
     try {
       const a = { category: "paddle", budget: "under-500", experience: "beginner", priority: "value" } as const;
       expect(matchGear(approvedFixtures, a)).toHaveLength(0);
