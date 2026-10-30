@@ -58,7 +58,8 @@ export type ContentBlock =
   | { type: "h3"; text: string }
   | { type: "ul"; items: string[] }
   | { type: "ol"; items: string[] }
-  | { type: "img"; src: string; alt: string; caption?: string };
+  | { type: "img"; src: string; alt: string; caption?: string }
+  | { type: "gear"; gearIds: string[] };
 
 export interface Story {
   id: string;

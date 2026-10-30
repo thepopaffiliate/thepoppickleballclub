@@ -16,13 +16,13 @@ export const Route = createFileRoute("/stories/$slug")({
   },
   head: ({ loaderData, params }) =>
     loaderData
-      ? pageMeta({ title: loaderData.s.title, description: loaderData.s.summary, path: `/stories/${params.slug}`, type: "article" })
-      : { meta: [{ title: "Story not found | The Pop." }, { name: "robots", content: "noindex" }] },
+      ? pageMeta({ title: loaderData.s.title, description: loaderData.s.summary, path: `/stories/${params.slug}`, type: "article", image: loaderData.s.coverImageUrl, noindex: loaderData.s.status !== "published" })
+      : pageMeta({ title: "Read unavailable", description: "This read is currently unavailable on The Pop.", path: `/stories/${params.slug}`, noindex: true }),
   component: StoryPage,
   notFoundComponent: () => (
     <div className="container-page py-24 text-center">
       <h1 className="font-display text-5xl">Story not found</h1>
-      <Link to="/stories" className="btn btn-primary mt-6">All stories</Link>
+      <Link to="/stories" className="btn btn-primary mt-6">Latest Reads</Link>
     </div>
   ),
   errorComponent: () => <div className="container-page py-24 text-center">Something went wrong.</div>,
@@ -35,7 +35,7 @@ function StoryPage() {
   const related = visibleStories.filter((x) => x.id !== s.id).slice(0, 3);
   return (
     <article className="container-page py-8">
-      <Breadcrumbs items={[{ label: "Stories", to: "/stories" }, { label: s.title }]} />
+      <Breadcrumbs items={[{ label: "Latest Reads", to: "/stories" }, { label: s.title }]} />
       <header className="mt-6 max-w-3xl">
         <div className="flex gap-2"><span className="chip bg-ice">{s.category}</span><DemoBadge status={s.status} /></div>
         <h1 className="font-display mt-3 text-5xl md:text-7xl">{s.title}</h1>
@@ -54,6 +54,10 @@ function StoryPage() {
             case "h3": return <h3 key={i}>{b.text}</h3>;
             case "ul": return <ul key={i}>{b.items.map((t) => <li key={t}>{t}</li>)}</ul>;
             case "ol": return <ol key={i}>{b.items.map((t) => <li key={t}>{t}</li>)}</ol>;
+            case "gear": {
+              const products = getGearByIds(b.gearIds);
+              return products.length ? <section key={i} className="my-6"><div className="grid gap-4 sm:grid-cols-2">{products.map((g) => <GearCard key={g.id} g={g} placement="story_inline" />)}</div><div className="mt-3"><Disclosure compact /></div></section> : null;
+            }
             case "img": return (
               <figure key={i} className="my-6">
                 <img src={b.src} alt={b.alt} width={1200} height={800} loading="lazy" className="rounded-2xl" />
@@ -72,7 +76,7 @@ function StoryPage() {
       )}
       {related.length > 0 && (
         <section className="mt-14">
-          <h2 className="font-display text-4xl">More stories</h2>
+          <h2 className="font-display text-4xl">More reads</h2>
           <div className="mt-5 grid gap-5 md:grid-cols-3">{related.map((x) => <StoryCard key={x.id} s={x} />)}</div>
         </section>
       )}

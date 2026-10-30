@@ -1,16 +1,19 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMemo } from "react";
 import { Search } from "lucide-react";
-import { visibleGear, budgetLabels, categoryLabels } from "@/content/gear";
+import { visibleGear, categoryLabels } from "@/content/gear";
+import { gearFinderConfig, getBudgetOption } from "@/content/gear-config";
 import type { BudgetTier, GearCategory } from "@/content/types";
 import { PageIntro } from "@/components/site/layout";
 import { Disclosure, EmptyState, GearCard } from "@/components/site/cards";
 import { pageMeta } from "@/lib/seo";
+import { fitsBudget, hasVerifiedPrice } from "@/lib/product-data";
+import { Button } from "@/components/ui/button";
 
 type Sort = "price-asc" | "price-desc" | "checked";
 interface GearSearch {
   q?: string;
-  category?: GearCategory;
+  category?: GearCategory | "apparel";
   budget?: BudgetTier;
   sort?: Sort;
 }
@@ -20,14 +23,14 @@ const pick = <T extends string>(v: unknown, allowed: readonly T[]) => (allowed.i
 export const Route = createFileRoute("/gear/")({
   validateSearch: (s: Record<string, unknown>): GearSearch => ({
     q: typeof s.q === "string" && s.q ? s.q : undefined,
-    category: pick(s.category, Object.keys(categoryLabels) as GearCategory[]),
-    budget: pick(s.budget, Object.keys(budgetLabels) as BudgetTier[]),
+    category: pick(s.category, Object.keys(categoryLabels) as (GearCategory | "apparel")[]),
+    budget: pick(s.budget, gearFinderConfig.paddle.budgets.map((b) => b.id)),
     sort: pick(s.sort, ["price-asc", "price-desc", "checked"] as const),
   }),
   head: () =>
     pageMeta({
       title: "Budget pickleball gear",
-      description: "Browse affordable pickleball paddles, starter sets, balls, bags and apparel with listed prices and last-checked dates.",
+      description: "Discover pickleball paddles, balls, shoes, bags, accessories and starter sets with verified estimates and last-checked dates when available.",
       path: "/gear",
     }),
   component: GearDirectory,
@@ -45,19 +48,20 @@ function GearDirectory() {
     const list = visibleGear.filter(
       (g) =>
         (!search.category || g.category === search.category) &&
-        (!search.budget || g.budgetTier === search.budget) &&
+        (!search.budget || (g.category !== "apparel" && (() => { const b = getBudgetOption(g.category, search.budget); return b ? fitsBudget(g, b) : false; })())) &&
         (!q || `${g.name} ${g.description}`.toLowerCase().includes(q)),
     );
     const sort = search.sort ?? "price-asc";
-    return [...list].sort((a, b) =>
-      sort === "price-asc" ? a.pricePHP - b.pricePHP : sort === "price-desc" ? b.pricePHP - a.pricePHP : b.priceCheckedAt.localeCompare(a.priceCheckedAt),
-    );
+    return [...list].sort((a, b) => {
+      if (hasVerifiedPrice(a) !== hasVerifiedPrice(b)) return hasVerifiedPrice(a) ? -1 : 1;
+      return sort === "price-asc" ? (a.pricePHP ?? 0) - (b.pricePHP ?? 0) : sort === "price-desc" ? (b.pricePHP ?? 0) - (a.pricePHP ?? 0) : (b.priceCheckedAt ?? "").localeCompare(a.priceCheckedAt ?? "");
+    });
   }, [search]);
 
   return (
     <>
       <PageIntro eyebrow="Budget Finds" title="Gear">
-        Listed prices, last-checked dates, and simple notes. Bili ka lang sa Shopee kapag sigurado ka na.
+        Estimated prices, last-checked dates, and simple notes when verified. Existing demo entries are placeholders, not recommendations.
       </PageIntro>
       <div className="container-page mt-8">
         <div className="grid gap-3 rounded-2xl border bg-card p-4 md:grid-cols-4">
@@ -74,16 +78,16 @@ function GearDirectory() {
           </label>
           <label>
             <span className="sr-only">Category</span>
-            <select className={selectCls} value={search.category ?? ""} onChange={(e) => set({ category: (e.target.value || undefined) as GearCategory | undefined })}>
+            <select className={selectCls} value={search.category ?? ""} onChange={(e) => set({ category: (e.target.value || undefined) as GearSearch["category"], budget: undefined })}>
               <option value="">All categories</option>
               {Object.entries(categoryLabels).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
             </select>
           </label>
           <label>
             <span className="sr-only">Budget</span>
-            <select className={selectCls} value={search.budget ?? ""} onChange={(e) => set({ budget: (e.target.value || undefined) as BudgetTier | undefined })}>
-              <option value="">Any budget</option>
-              {Object.entries(budgetLabels).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+            <select className={selectCls} disabled={!search.category || search.category === "apparel"} value={search.budget ?? ""} onChange={(e) => set({ budget: (e.target.value || undefined) as BudgetTier | undefined })}>
+              <option value="">{search.category && search.category !== "apparel" ? "Any budget (provisional)" : "Choose category for budgets"}</option>
+              {search.category && search.category !== "apparel" && gearFinderConfig[search.category].budgets.map((b) => <option key={b.id} value={b.id}>{b.label}</option>)}
             </select>
           </label>
           <label>
@@ -104,7 +108,7 @@ function GearDirectory() {
           ) : (
             <EmptyState title="Walang match">
               <p>Try a different budget or category.</p>
-              <button className="btn btn-night mt-4" onClick={() => navigate({ search: {}, replace: true })}>Clear filters</button>
+              <Button variant="site" size="site" className="btn-night rounded-full mt-4" onClick={() => navigate({ search: {}, replace: true })}>Clear filters</Button>
             </EmptyState>
           )}
         </div>
