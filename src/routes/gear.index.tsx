@@ -21,12 +21,16 @@ interface GearSearch {
 const pick = <T extends string>(v: unknown, allowed: readonly T[]) => (allowed.includes(v as T) ? (v as T) : undefined);
 
 export const Route = createFileRoute("/gear/")({
-  validateSearch: (s: Record<string, unknown>): GearSearch => ({
-    q: typeof s["q"] === "string" && s["q"] ? s["q"] : undefined,
-    category: pick(s["category"], Object.keys(categoryLabels) as (GearCategory | "apparel")[]),
-    budget: pick(s["budget"], gearFinderConfig.paddle.budgets.map((b) => b.id)),
-    sort: pick(s["sort"], ["price-asc", "price-desc", "checked"] as const),
-  }),
+  validateSearch: (s: Record<string, unknown>): GearSearch => {
+    const category = pick(s["category"], Object.keys(categoryLabels) as (GearCategory | "apparel")[]);
+    const budgetIds = category && category !== "apparel" ? gearFinderConfig[category].budgets.map((b) => b.id) : Object.values(gearFinderConfig).flatMap((c) => c.budgets.map((b) => b.id));
+    return {
+      q: typeof s["q"] === "string" && s["q"] ? s["q"] : undefined,
+      category,
+      budget: pick(s["budget"], budgetIds),
+      sort: pick(s["sort"], ["price-asc", "price-desc", "checked"] as const),
+    };
+  },
   head: () =>
     pageMeta({
       title: "Budget pickleball gear",
@@ -45,10 +49,11 @@ function GearDirectory() {
 
   const results = useMemo(() => {
     const q = (search.q ?? "").toLowerCase();
+    const selectedBudget = search.budget;
     const list = visibleGear.filter(
       (g) =>
         (!search.category || g.category === search.category) &&
-        (!search.budget || (g.category !== "apparel" && (() => { const b = getBudgetOption(g.category, search.budget as BudgetTier); return b ? fitsBudget(g, b) : false; })())) &&
+        (!selectedBudget || (g.category !== "apparel" && (() => { const b = getBudgetOption(g.category, selectedBudget); return b ? fitsBudget(g, b) : false; })())) &&
         (!q || `${g.name} ${g.description}`.toLowerCase().includes(q)),
     );
     const sort = search.sort ?? "price-asc";
@@ -78,21 +83,21 @@ function GearDirectory() {
           </label>
           <label>
             <span className="sr-only">Category</span>
-            <select className={selectCls} value={search.category ?? ""} onChange={(e) => set({ category: (e.target.value || undefined) as GearSearch["category"], budget: undefined })}>
+            <select aria-label="Category" className={selectCls} value={search.category ?? ""} onChange={(e) => set({ category: (e.target.value || undefined) as GearSearch["category"], budget: undefined })}>
               <option value="">All categories</option>
               {Object.entries(categoryLabels).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
             </select>
           </label>
           <label>
             <span className="sr-only">Budget</span>
-            <select className={selectCls} disabled={!search.category || search.category === "apparel"} value={search.budget ?? ""} onChange={(e) => set({ budget: (e.target.value || undefined) as BudgetTier | undefined })}>
+            <select aria-label="Budget" className={selectCls} disabled={!search.category || search.category === "apparel"} value={search.budget ?? ""} onChange={(e) => set({ budget: (e.target.value || undefined) as BudgetTier | undefined })}>
               <option value="">{search.category && search.category !== "apparel" ? "Any budget (provisional)" : "Choose category for budgets"}</option>
               {search.category && search.category !== "apparel" && gearFinderConfig[search.category].budgets.map((b) => <option key={b.id} value={b.id}>{b.label}</option>)}
             </select>
           </label>
           <label>
             <span className="sr-only">Sort</span>
-            <select className={selectCls} value={search.sort ?? "price-asc"} onChange={(e) => set({ sort: e.target.value as Sort })}>
+            <select aria-label="Sort" className={selectCls} value={search.sort ?? "price-asc"} onChange={(e) => set({ sort: e.target.value as Sort })}>
               <option value="price-asc">Price: low to high</option>
               <option value="price-desc">Price: high to low</option>
               <option value="checked">Recently checked</option>
