@@ -13,9 +13,9 @@ export const siteSettings: SiteSettings = {
   },
   contactMethod: "",
   disclosureText:
-    "Some links on The Pop. are affiliate links. If you purchase through them, we may earn a commission at no additional cost to you. We aim to share budget-friendly finds honestly. Prices, product details and availability may change on Shopee.",
+    "Some links on The Pop. are affiliate links. If you purchase through them, we may earn a commission at no additional cost to you. We aim to share budget-friendly finds honestly. Prices, product details and availability may change at the linked destination.",
   independenceNote:
-    "The Pop. is an independent discovery and editorial site and is not officially affiliated with or endorsed by Shopee or any sports brand.",
+    "The Pop. is an independent discovery and editorial site and is not officially affiliated with or endorsed by any marketplace or sports brand.",
   priceStaleAfterDays: 14,
 };
 

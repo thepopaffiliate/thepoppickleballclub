@@ -5,6 +5,8 @@ import { categoryLabels } from "@/content/gear";
 import { platformLabels, siteSettings } from "@/content/settings";
 import { formatDate, formatPHP, isPriceStale } from "@/lib/format";
 import { track } from "@/lib/analytics";
+import { getAffiliateDestination, getReviewLabel, hasVerifiedPrice } from "@/lib/product-data";
+import { Button } from "@/components/ui/button";
 
 export function DemoBadge({ status }: { status: string }) {
   if (status !== "demo") return null;
@@ -24,42 +26,48 @@ export function Disclosure({ compact = false }: { compact?: boolean }) {
 }
 
 export function PriceInfo({ g, large = false }: { g: Gear; large?: boolean }) {
+  if (!hasVerifiedPrice(g)) {
+    return <p className="text-sm text-muted-foreground">Price not yet verified</p>;
+  }
   const stale = isPriceStale(g.priceCheckedAt, siteSettings.priceStaleAfterDays);
   return (
     <div>
+      <p className="text-xs text-muted-foreground">Estimated price</p>
       <p className={`font-ui font-bold ${large ? "text-3xl" : "text-xl"}`}>
         {formatPHP(g.pricePHP)}
-        <span className="sr-only"> listed price</span>
       </p>
-      <p className="text-xs text-muted-foreground">Price checked {formatDate(g.priceCheckedAt)}</p>
+      <p className="text-xs text-muted-foreground">Last checked {formatDate(g.priceCheckedAt)}</p>
       {stale && (
         <p className="mt-1 flex items-center gap-1 text-xs font-semibold text-warning-foreground">
-          <AlertTriangle className="size-3" aria-hidden /> Price may have changed—check Shopee.
+          <AlertTriangle className="size-3 shrink-0" aria-hidden /> Price may have changed—check product.
         </p>
       )}
     </div>
   );
 }
 
-export function ShopeeButton({ g, placement, full = false }: { g: Gear; placement: string; full?: boolean }) {
-  if (!g.shopeeAffiliateUrl) {
+export function ProductButton({ g, placement, full = false }: { g: Gear; placement: string; full?: boolean }) {
+  const destination = getAffiliateDestination(g, placement);
+  if (!destination) {
     return (
-      <span className={`btn bg-muted text-muted-foreground ${full ? "w-full" : ""}`} aria-disabled="true">
-        Shopee link not added yet
-      </span>
+      <div className={full ? "w-full" : ""}>
+        <Button variant="site" size="site" disabled className={`bg-muted text-muted-foreground rounded-full ${full ? "w-full" : ""}`}>Check product</Button>
+        <p className="mt-1 text-xs text-muted-foreground">Product link not yet available</p>
+      </div>
     );
   }
   return (
+    <Button asChild variant="site" size="site" className={`btn-primary rounded-full ${full ? "w-full" : ""}`}>
     <a
-      href={g.shopeeAffiliateUrl}
+      href={destination}
       target="_blank"
       rel="noopener noreferrer sponsored"
-      className={`btn btn-primary ${full ? "w-full" : ""}`}
       onClick={() => track("shopee_outbound_click", { productId: g.id, placement })}
     >
-      View on Shopee <ExternalLink className="size-4" aria-hidden />
+      Check product <ExternalLink className="size-4" aria-hidden />
       <span className="sr-only">(affiliate link, opens in new tab)</span>
     </a>
+    </Button>
   );
 }
 
@@ -72,7 +80,7 @@ export function GearCard({ g, placement }: { g: Gear; placement: string }) {
         onClick={() => track("product_card_click", { productId: g.id, placement })}
         className="block"
       >
-        <img src={g.imageUrl} alt={g.imageAlt} width={600} height={600} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+        {g.imageUrl ? <img src={g.imageUrl} alt={g.imageAlt} width={600} height={600} loading="lazy" className="aspect-[4/3] w-full object-cover" /> : <div className="aspect-[4/3] bg-muted flex items-center justify-center text-muted-foreground text-sm">Image not yet available</div>}
       </Link>
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div className="flex flex-wrap gap-2">
@@ -90,12 +98,25 @@ export function GearCard({ g, placement }: { g: Gear; placement: string }) {
           </Link>
         </h3>
         <p className="text-sm text-muted-foreground">{g.description}</p>
+        <ProductEvidence g={g} />
         <div className="mt-auto space-y-3 pt-2">
           <PriceInfo g={g} />
-          <ShopeeButton g={g} placement={placement} full />
+          <ProductButton g={g} placement={placement} full />
         </div>
       </div>
     </article>
+  );
+}
+
+export function ProductEvidence({ g }: { g: Gear }) {
+  return (
+    <div className="space-y-1 text-xs text-muted-foreground">
+      <p className="font-semibold">{getReviewLabel(g)}</p>
+      {g.intendedUser && <p>Intended user: {g.intendedUser}</p>}
+      {g.verifiedSpecs?.length ? <dl>{g.verifiedSpecs.map((s) => <div key={s.label}><dt className="inline font-semibold">{s.label}: </dt><dd className="inline">{s.value}</dd></div>)}</dl> : null}
+      {g.pros.length > 0 && <p>Strengths: {g.pros.join("; ")}</p>}
+      {g.cons.length > 0 && <p>Limitations: {g.cons.join("; ")}</p>}
+    </div>
   );
 }
 

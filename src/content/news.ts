@@ -40,8 +40,14 @@ export const news: NewsItem[] = [
   },
 ];
 
+export function isSourcedNews(n: NewsItem) {
+  return n.status === "published" && Boolean(n.sourceName.trim()) && /^https?:\/\/\S+$/i.test(n.sourceUrl) &&
+    Number.isFinite(Date.parse(n.sourcePublishedAt)) && Number.isFinite(Date.parse(n.checkedAt));
+}
+
 export const visibleNews = news
-  .filter((n) => n.status !== "draft")
+  .filter(isSourcedNews)
   .sort((a, b) => b.sourcePublishedAt.localeCompare(a.sourcePublishedAt));
 
-export const getNewsBySlug = (slug: string) => visibleNews.find((n) => n.slug === slug);
+// Keep existing placeholder detail URLs available for review, but out of the news feed.
+export const getNewsBySlug = (slug: string) => news.find((n) => n.status !== "draft" && n.slug === slug);
