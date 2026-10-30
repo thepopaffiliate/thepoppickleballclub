@@ -1,4 +1,4 @@
-import type { Story } from "./types";
+import type { Story, StoryCategory } from "./types";
 import flatlay from "@/assets/gear-flatlay.jpg";
 import community from "@/assets/community-court.jpg";
 import hero from "@/assets/hero-court.jpg";
@@ -26,7 +26,7 @@ export const stories: Story[] = [
       { type: "h2", text: "3. Face material, in simple terms" },
       { type: "ul", items: ["Fiberglass — common in budget paddles.", "Carbon fiber — often found at higher price points.", "Composite — a mix; check what the listing actually says."] },
       { type: "h2", text: "4. Read the listing carefully" },
-      { type: "ol", items: ["Compare the photos with the description.", "Check seller ratings and recent buyer photos on Shopee.", "Note the return policy before checking out."] },
+      { type: "ol", items: ["Compare the photos with the description.", "Check seller ratings and recent buyer photos at the linked destination.", "Note the return policy before checking out."] },
       { type: "p", text: "Tip: If you're still testing if you like the sport, a starter set can be more sulit than a single paddle." },
     ],
   },
@@ -73,6 +73,8 @@ export const stories: Story[] = [
     ],
   },
 ];
+
+export const storyCategories: StoryCategory[] = ["Beginner Tips", "Buying Guides", "Gear Guides", "Product Comparisons", "Court Lifestyle", "Filipino Pickleball"];
 
 export const visibleStories = stories
   .filter((s) => s.status !== "draft")

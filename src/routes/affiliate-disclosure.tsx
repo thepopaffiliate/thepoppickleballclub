@@ -13,9 +13,9 @@ export const Route = createFileRoute("/affiliate-disclosure")({
         <p>{siteSettings.independenceNote}</p>
         <h2>What this means</h2>
         <ul>
-          <li>Clicking "View on Shopee" opens Shopee in a new tab. Purchases happen on Shopee, not here.</li>
-          <li>Prices show the date we last checked them. Always confirm the current price on Shopee.</li>
-          <li>A click on our site is not a sale; commissions are only confirmed by Shopee.</li>
+          <li>Clicking "Check product" opens the linked destination in a new tab. Purchases happen there, not here.</li>
+          <li>Prices are estimates and show the date we last checked them when available. Always confirm the current price at the linked destination.</li>
+          <li>A click on our site is not a sale; commissions are only confirmed by the affiliate provider.</li>
           <li>We never show fake ratings, reviews or "best seller" labels.</li>
         </ul>
       </div>

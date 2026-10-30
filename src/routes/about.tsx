@@ -13,7 +13,7 @@ export const Route = createFileRoute("/about")({
         <p>Help Filipinos play more without spending more. We curate budget-friendly pickleball gear, share honest finds, explain trends, and build a welcoming community around playing.</p>
         <h2>What we cover</h2>
         <ul>
-          <li><strong>Budget Finds</strong> — affordable paddles, sets, balls, bags and apparel.</li>
+          <li><strong>Budget Finds</strong> — paddles, balls, shoes, bags, accessories and starter sets.</li>
           <li><strong>Player Lifestyle</strong> — routines, etiquette and court culture.</li>
           <li><strong>Product Truth</strong> — honest explainers with pros, cons and limits.</li>
           <li><strong>Court Community</strong> — local news, events and questions.</li>

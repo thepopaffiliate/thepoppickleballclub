@@ -16,13 +16,13 @@ export const Route = createFileRoute("/news/$slug")({
   },
   head: ({ loaderData, params }) =>
     loaderData
-      ? pageMeta({ title: loaderData.n.title, description: loaderData.n.summary, path: `/news/${params.slug}`, type: "article" })
-      : { meta: [{ title: "News not found | The Pop." }, { name: "robots", content: "noindex" }] },
+      ? pageMeta({ title: loaderData.n.title, description: loaderData.n.summary, path: `/news/${params.slug}`, type: "article", image: loaderData.n.coverImageUrl, noindex: loaderData.n.status !== "published" })
+      : pageMeta({ title: "Update unavailable", description: "This update is currently unavailable on The Pop.", path: `/news/${params.slug}`, noindex: true }),
   component: NewsPage,
   notFoundComponent: () => (
     <div className="container-page py-24 text-center">
       <h1 className="font-display text-5xl">News item not found</h1>
-      <Link to="/news" className="btn btn-primary mt-6">All news</Link>
+      <Link to="/news" className="btn btn-primary mt-6">What's Happening</Link>
     </div>
   ),
   errorComponent: () => <div className="container-page py-24 text-center">Something went wrong.</div>,
@@ -33,7 +33,7 @@ function NewsPage() {
   useEffect(() => { track("news_open", { newsId: n.id }); }, [n.id]);
   return (
     <article className="container-page max-w-3xl py-8">
-      <Breadcrumbs items={[{ label: "News", to: "/news" }, { label: n.title }]} />
+      <Breadcrumbs items={[{ label: "What's Happening", to: "/news" }, { label: n.title }]} />
       <div className="mt-6 flex gap-2"><span className="chip bg-night text-night-foreground">{n.category}</span><DemoBadge status={n.status} /></div>
       <h1 className="font-display mt-3 text-5xl md:text-6xl">{n.title}</h1>
       <div className="mt-5 rounded-2xl border-l-4 border-primary bg-muted p-4 text-sm">

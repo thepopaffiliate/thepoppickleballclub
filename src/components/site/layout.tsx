@@ -3,12 +3,13 @@ import { useState } from "react";
 import { Menu, X, ChevronRight } from "lucide-react";
 import { siteSettings } from "@/content/settings";
 import { SocialLinks } from "./interactive";
+import { Button } from "@/components/ui/button";
 
 const nav = [
   { to: "/gear-finder", label: "Gear Finder" },
   { to: "/gear", label: "Gear" },
-  { to: "/stories", label: "Stories" },
-  { to: "/news", label: "News" },
+  { to: "/stories", label: "Latest Reads" },
+  { to: "/news", label: "What's Happening" },
   { to: "/community", label: "Community" },
   { to: "/about", label: "About" },
 ] as const;
@@ -32,7 +33,7 @@ export function SiteHeader() {
         <Link to="/" aria-label="The Pop. home" onClick={() => setOpen(false)}>
           <Logo />
         </Link>
-        <nav aria-label="Main" className="hidden md:block">
+        <nav aria-label="Main" className="hidden lg:block">
           <ul className="flex items-center gap-1 font-ui text-sm font-semibold">
             {nav.map((n) => (
               <li key={n.to}>
@@ -47,19 +48,19 @@ export function SiteHeader() {
             ))}
           </ul>
         </nav>
-        <button
+        <Button variant="site" size="site"
           type="button"
-          className="btn md:hidden -mr-2 px-3"
+          className="lg:hidden -mr-2 px-3 rounded-full"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((o) => !o)}
         >
           {open ? <X aria-hidden /> : <Menu aria-hidden />}
-        </button>
+        </Button>
       </div>
       {open && (
-        <nav id="mobile-nav" aria-label="Mobile" className="border-t bg-background md:hidden">
+        <nav id="mobile-nav" aria-label="Mobile" className="border-t bg-background lg:hidden">
           <ul className="container-page py-3 font-ui font-semibold">
             {nav.map((n) => (
               <li key={n.to}>

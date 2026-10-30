@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Sparkles } from "lucide-react";
 import hero from "@/assets/hero-court.jpg";
-import { visibleGear, budgetLabels } from "@/content/gear";
+import { visibleGear } from "@/content/gear";
+import { gearFinderConfig, finderCategories } from "@/content/gear-config";
 import { visibleStories } from "@/content/stories";
 import { visibleNews } from "@/content/news";
 import { visibleSocial } from "@/content/social";
@@ -9,7 +10,6 @@ import { siteSettings } from "@/content/settings";
 import { Disclosure, GearCard, NewsCard, SocialCard, StoryCard, EmptyState } from "@/components/site/cards";
 import { Poll } from "@/components/site/interactive";
 import { pageMeta } from "@/lib/seo";
-import type { BudgetTier } from "@/content/types";
 
 export const Route = createFileRoute("/")({
   head: () =>
@@ -21,7 +21,6 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const shortcuts: BudgetTier[] = ["under-500", "500-800", "800-1500"];
 
 function SectionHead({ eyebrow, title, to, cta }: { eyebrow: string; title: string; to: "/gear" | "/stories" | "/news"; cta: string }) {
   return (
@@ -54,18 +53,18 @@ function Home() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/gear-finder" className="btn btn-primary">Find your gear <ArrowRight className="size-4" aria-hidden /></Link>
-            <Link to="/stories" className="btn btn-outline text-night-foreground">Explore stories</Link>
+            <Link to="/stories" className="btn btn-outline text-night-foreground">Explore Latest Reads</Link>
           </div>
         </div>
       </section>
 
       <section className="container-page -mt-6 relative" aria-labelledby="budget-h">
         <div className="rounded-2xl bg-card p-5 shadow-card md:p-6">
-          <h2 id="budget-h" className="font-ui font-bold">Shop by budget</h2>
-          <div className="mt-3 grid grid-cols-3 gap-2">
-            {shortcuts.map((b) => (
-              <Link key={b} to="/gear" search={{ budget: b }} className="btn rounded-xl bg-ice px-2 text-center hover:bg-accent">
-                {budgetLabels[b]}
+          <h2 id="budget-h" className="font-ui font-bold">Browse by category</h2>
+          <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
+            {finderCategories.map((category) => (
+              <Link key={category} to="/gear" search={{ category }} className="btn rounded-xl bg-ice px-2 text-center hover:bg-accent">
+                {gearFinderConfig[category].label}
               </Link>
             ))}
           </div>
@@ -89,11 +88,11 @@ function Home() {
           <div>
             <p className="eyebrow text-value"><Sparkles className="inline size-4" aria-hidden /> Sulit Gear Finder</p>
             <h2 className="font-display mt-2 text-5xl md:text-6xl">4 questions. Gear that fits your budget.</h2>
-            <p className="mt-3 opacity-85">Budget, experience, what you need, and what matters most. We'll match it against our listed finds — walang hula.</p>
+            <p className="mt-3 opacity-85">What you need, your budget, experience, and priority. Approved products only — walang hula.</p>
             <Link to="/gear-finder" className="btn btn-primary mt-6">Start the finder</Link>
           </div>
           <ol className="grid grid-cols-2 gap-3 font-ui text-sm font-semibold">
-            {["Budget", "Experience", "Looking for", "Priority"].map((s, i) => (
+            {["Looking for", "Budget", "Experience", "Priority"].map((s, i) => (
               <li key={s} className="rounded-2xl bg-night-foreground/10 p-4">
                 <span className="font-display block text-4xl text-primary">0{i + 1}</span>{s}
               </li>
@@ -103,14 +102,14 @@ function Home() {
       </section>
 
       <section className="container-page mt-20">
-        <SectionHead eyebrow="Stories & Guides" title="Latest reads" to="/stories" cta="All stories" />
+        <SectionHead eyebrow="Buying Guides & Comparisons" title="Latest Reads" to="/stories" cta="All reads" />
         <div className="grid gap-5 md:grid-cols-3">
           {visibleStories.slice(0, 3).map((s) => <StoryCard key={s.id} s={s} />)}
         </div>
       </section>
 
       <section className="container-page mt-20">
-        <SectionHead eyebrow="News & Trends" title="What's happening" to="/news" cta="All news" />
+        <SectionHead eyebrow="News, Events & Community" title="What's Happening" to="/news" cta="All updates" />
         {visibleNews.length ? (
           <div className="grid gap-5 md:grid-cols-2">
             {visibleNews.slice(0, 2).map((n) => <NewsCard key={n.id} n={n} />)}
