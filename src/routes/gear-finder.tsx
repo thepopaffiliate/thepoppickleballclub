@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, RotateCcw, Loader2 } from "lucide-react";
 import { visibleGear, experienceLabels, useCaseLabels } from "@/content/gear";
 import { gearFinderConfig, finderCategories, getBudgetOption } from "@/content/gear-config";
@@ -38,6 +38,13 @@ function GearFinder() {
   const steps = getSteps(answers);
   const done = step >= steps.length;
   const current = steps[step];
+  const questionRef = useRef<HTMLFieldSetElement>(null);
+
+  useEffect(() => {
+    if (step > 0 && !done && window.matchMedia("(max-width: 639px)").matches) {
+      questionRef.current?.scrollIntoView({ block: "start" });
+    }
+  }, [step, done]);
 
   useEffect(() => {
     if (!done) return;
@@ -82,7 +89,7 @@ function GearFinder() {
         {answers.category && step > 0 && <p className="mt-4 font-ui text-sm font-semibold">{gearFinderConfig[answers.category].label}{answers.budget ? ` · ${getBudgetOption(answers.category, answers.budget)?.label ?? ""}` : ""}</p>}
 
         {!done && current ? (
-          <fieldset className="mt-8" key={step}>
+          <fieldset ref={questionRef} className="mt-8 scroll-mt-24" key={step}>
             <legend className="font-display text-4xl md:text-5xl">{current.q}</legend>
             {current.key === "budget" && answers.category && gearFinderConfig[answers.category].provisional && <p className="mt-3 text-sm text-muted-foreground">Provisional ranges — final budgets for {gearFinderConfig[answers.category].label.toLowerCase()} are awaiting review.</p>}
             {current.key === "priority" && current.options["not-configured"] && <p className="mt-3 text-sm text-muted-foreground">Preferences for {answers.category ? gearFinderConfig[answers.category].label.toLowerCase() : "this category"} are not yet configured.</p>}
@@ -127,7 +134,7 @@ function Results({ answers, onJump }: { answers: FinderAnswers; onJump: (p: Part
         <ul className="mt-6 space-y-4">
           {matches.map(({ gear: g, reasons }) => (
             <li key={g.id} className="grid gap-4 rounded-2xl border bg-card p-4 shadow-card sm:grid-cols-[140px_1fr]">
-              <img src={g.imageUrl} alt={g.imageAlt} width={280} height={280} loading="lazy" className="aspect-square w-full rounded-xl object-cover" />
+              {g.imageUrl ? <img src={g.imageUrl} alt={g.imageAlt} width={280} height={280} loading="lazy" className="aspect-square w-full rounded-xl object-cover" /> : <div className="aspect-square flex items-center justify-center rounded-xl bg-muted text-sm text-muted-foreground">Image not yet available</div>}
               <div>
                 <DemoBadge status={g.status} />
                 <h3 className="mt-1 font-ui text-lg font-bold">
