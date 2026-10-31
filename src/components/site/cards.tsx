@@ -7,6 +7,7 @@ import { formatDate, formatPHP, isPriceStale } from "@/lib/format";
 import { track } from "@/lib/analytics";
 import { getAffiliateDestination, getReviewLabel, hasVerifiedPrice } from "@/lib/product-data";
 import { Button } from "@/components/ui/button";
+import { safeExternalUrl, safeImageSrc } from "@/lib/url-safety";
 
 export function DemoBadge({ status }: { status: string }) {
   if (status !== "demo") return null;
@@ -80,7 +81,7 @@ export function GearCard({ g, placement }: { g: Gear; placement: string }) {
         onClick={() => track("product_card_click", { productId: g.id, placement })}
         className="block"
       >
-        {g.imageUrl ? <img src={g.imageUrl} alt={g.imageAlt} width={600} height={600} loading="lazy" className="aspect-[4/3] w-full object-cover" /> : <div className="aspect-[4/3] bg-muted flex items-center justify-center text-muted-foreground text-sm">Image not yet available</div>}
+        {safeImageSrc(g.imageUrl) ? <img src={safeImageSrc(g.imageUrl)!} alt={g.imageAlt} width={600} height={600} loading="lazy" className="aspect-[4/3] w-full object-cover" /> : <div className="aspect-[4/3] bg-muted flex items-center justify-center text-muted-foreground text-sm">Image not yet available</div>}
       </Link>
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div className="flex flex-wrap gap-2">
@@ -123,7 +124,7 @@ export function ProductEvidence({ g }: { g: Gear }) {
 export function StoryCard({ s }: { s: Story }) {
   return (
     <article className="flex flex-col overflow-hidden rounded-2xl border bg-card shadow-card">
-      <img src={s.coverImageUrl} alt={s.coverImageAlt} width={800} height={500} loading="lazy" className="aspect-[16/10] w-full object-cover" />
+      {safeImageSrc(s.coverImageUrl) ? <img src={safeImageSrc(s.coverImageUrl)!} alt={s.coverImageAlt} width={800} height={500} loading="lazy" className="aspect-[16/10] w-full object-cover" /> : <div className="aspect-[16/10] bg-muted flex items-center justify-center text-muted-foreground text-sm">Image not yet available</div>}
       <div className="flex flex-1 flex-col gap-2 p-5">
         <div className="flex flex-wrap gap-2">
           <span className="chip bg-ice text-foreground">{s.category}</span>
@@ -168,7 +169,7 @@ export function SocialCard({ p }: { p: SocialPost }) {
   return (
     <article className="w-64 shrink-0 snap-start overflow-hidden rounded-2xl border bg-card shadow-card md:w-auto">
       <div className="relative">
-        <img src={p.thumbnailUrl} alt={p.thumbnailAlt} width={400} height={500} loading="lazy" className="aspect-[4/5] w-full object-cover" />
+        {safeImageSrc(p.thumbnailUrl) ? <img src={safeImageSrc(p.thumbnailUrl)!} alt={p.thumbnailAlt} width={400} height={500} loading="lazy" className="aspect-[4/5] w-full object-cover" /> : <div className="aspect-[4/5] bg-muted flex items-center justify-center text-muted-foreground text-sm">Image not yet available</div>}
         <span className="chip absolute left-3 top-3 bg-night text-night-foreground">
           <Icon className="size-3" aria-hidden /> {label} · {p.format}
         </span>
@@ -177,9 +178,9 @@ export function SocialCard({ p }: { p: SocialPost }) {
         <p className="eyebrow text-value-strong">{p.pillar}</p>
         <h3 className="font-ui font-bold leading-snug">{p.title}</h3>
         <DemoBadge status={p.status} />
-        {p.postUrl ? (
+        {safeExternalUrl(p.postUrl) ? (
           <a
-            href={p.postUrl}
+            href={safeExternalUrl(p.postUrl)!}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-outline w-full text-foreground"

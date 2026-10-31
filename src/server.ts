@@ -44,18 +44,38 @@ function isH3SwallowedErrorBody(body: string): boolean {
   }
 }
 
+const SECURITY_HEADERS: Record<string, string> = {
+  "X-Content-Type-Options": "nosniff",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+};
+
+/** Adds low-risk headers without overwriting any already supplied; keeps status and body. */
+export function withSecurityHeaders(response: Response): Response {
+  const missing = Object.entries(SECURITY_HEADERS).filter(([k]) => !response.headers.has(k));
+  if (missing.length === 0) return response;
+  try {
+    for (const [k, v] of missing) response.headers.set(k, v);
+    return response;
+  } catch {
+    const headers = new Headers(response.headers);
+    for (const [k, v] of missing) headers.set(k, v);
+    return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+  }
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
-      return await normalizeCatastrophicSsrResponse(response);
+      return withSecurityHeaders(await normalizeCatastrophicSsrResponse(response));
     } catch (error) {
       console.error(error);
-      return new Response(renderErrorPage(), {
+      return withSecurityHeaders(new Response(renderErrorPage(), {
         status: 500,
         headers: { "content-type": "text/html; charset=utf-8" },
-      });
+      }));
     }
   },
 };

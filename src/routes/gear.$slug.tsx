@@ -1,3 +1,4 @@
+import { safeExternalUrl, safeImageSrc } from "@/lib/url-safety";
 import { createFileRoute, notFound, Link, type ErrorComponentProps } from "@tanstack/react-router";
 import { ExternalLink } from "lucide-react";
 import { getGearBySlug, categoryLabels, experienceLabels, useCaseLabels } from "@/content/gear";
@@ -37,7 +38,7 @@ function GearDetail() {
     <article className="container-page py-8">
       <Breadcrumbs items={[{ label: "Gear", to: "/gear" }, { label: g.name }]} />
       <div className="mt-6 grid gap-8 md:grid-cols-2">
-        {g.imageUrl ? <img src={g.imageUrl} alt={g.imageAlt} width={800} height={800} className="aspect-square w-full rounded-3xl object-cover" /> : <div className="aspect-square flex items-center justify-center rounded-3xl bg-muted text-muted-foreground">Image not yet available</div>}
+        {safeImageSrc(g.imageUrl) ? <img src={safeImageSrc(g.imageUrl)!} alt={g.imageAlt} width={800} height={800} className="aspect-square w-full rounded-3xl object-cover" /> : <div className="aspect-square flex items-center justify-center rounded-3xl bg-muted text-muted-foreground">Image not yet available</div>}
         <div>
           <div className="flex flex-wrap gap-2">
             <span className="chip bg-accent">{categoryLabels[g.category]}</span>
@@ -49,8 +50,8 @@ function GearDetail() {
           <div className="mt-6"><PriceInfo g={g} large /></div>
           <div className="mt-5 flex flex-wrap gap-3">
             <ProductButton g={g} placement="gear_detail" />
-            {g.sourceUrl && (
-              <a href={g.sourceUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+            {safeExternalUrl(g.sourceUrl) && (
+              <a href={safeExternalUrl(g.sourceUrl)!} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
                 Check product <ExternalLink className="size-4" aria-hidden /><span className="sr-only"> (original source, opens in new tab)</span>
               </a>
             )}

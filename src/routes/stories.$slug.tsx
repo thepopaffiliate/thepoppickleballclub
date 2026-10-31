@@ -1,3 +1,4 @@
+import { safeImageSrc } from "@/lib/url-safety";
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { getStoryBySlug, visibleStories } from "@/content/stories";
@@ -45,7 +46,7 @@ function StoryPage() {
         </p>
         {s.status === "demo" && <p className="mt-3 rounded-lg bg-warning p-3 text-sm text-warning-foreground">Demo article — pending editor review before publishing.</p>}
       </header>
-      <img src={s.coverImageUrl} alt={s.coverImageAlt} width={1200} height={700} className="mt-8 aspect-[16/9] w-full max-w-4xl rounded-3xl object-cover" />
+      {safeImageSrc(s.coverImageUrl) && <img src={safeImageSrc(s.coverImageUrl)!} alt={s.coverImageAlt} width={1200} height={700} className="mt-8 aspect-[16/9] w-full max-w-4xl rounded-3xl object-cover" />}
       <div className="prose-pop mt-8 max-w-2xl text-lg">
         {s.content.map((b, i) => {
           switch (b.type) {
@@ -60,7 +61,7 @@ function StoryPage() {
             }
             case "img": return (
               <figure key={i} className="my-6">
-                <img src={b.src} alt={b.alt} width={1200} height={800} loading="lazy" className="rounded-2xl" />
+                {safeImageSrc(b.src) && <img src={safeImageSrc(b.src)!} alt={b.alt} width={1200} height={800} loading="lazy" className="rounded-2xl" />}
                 {b.caption && <figcaption className="mt-2 text-sm text-muted-foreground">{b.caption}</figcaption>}
               </figure>
             );

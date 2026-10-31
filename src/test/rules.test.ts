@@ -100,7 +100,7 @@ describe("Product evidence and affiliate destinations", () => {
     const g = { ...fixture, shopeeAffiliateUrl: "https://example.com/fallback", affiliateDestinations: { story_inline: issued, gear_detail: "" } };
     expect(getAffiliateDestination(g, "story_inline")).toBe(issued);
     expect(getAffiliateDestination(g, "home_featured")).toBe(g.shopeeAffiliateUrl);
-    expect(getAffiliateDestination(g, "gear_detail")).toBe("");
+    expect(getAffiliateDestination(g, "gear_detail")).toBeNull();
   });
 
   it("does not imply research or testing without editorial evidence", () => {
