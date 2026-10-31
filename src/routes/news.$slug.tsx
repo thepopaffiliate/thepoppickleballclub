@@ -1,3 +1,4 @@
+import { safeExternalUrl, safeImageSrc } from "@/lib/url-safety";
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { ExternalLink } from "lucide-react";
@@ -39,11 +40,11 @@ function NewsPage() {
       <div className="mt-5 rounded-2xl border-l-4 border-primary bg-muted p-4 text-sm">
         <p><strong>Source:</strong> {n.sourceName}</p>
         <p><strong>Published by source:</strong> {formatDate(n.sourcePublishedAt)} · <strong>Checked:</strong> {formatDate(n.checkedAt)}</p>
-        {n.sourceUrl ? (
-          <a href={n.sourceUrl} target="_blank" rel="noopener noreferrer" className="btn btn-night mt-3">Read the original <ExternalLink className="size-4" aria-hidden /></a>
+        {safeExternalUrl(n.sourceUrl) ? (
+          <a href={safeExternalUrl(n.sourceUrl)!} target="_blank" rel="noopener noreferrer" className="btn btn-night mt-3">Read the original <ExternalLink className="size-4" aria-hidden /></a>
         ) : <p className="mt-2 text-muted-foreground">Original source link not added yet.</p>}
       </div>
-      <img src={n.coverImageUrl} alt={n.coverImageAlt} width={1200} height={700} className="mt-6 aspect-[16/9] w-full rounded-3xl object-cover" />
+      {safeImageSrc(n.coverImageUrl) && <img src={safeImageSrc(n.coverImageUrl)!} alt={n.coverImageAlt} width={1200} height={700} className="mt-6 aspect-[16/9] w-full rounded-3xl object-cover" />}
       <section className="mt-6">
         <h2 className="eyebrow text-muted-foreground">What the source reports</h2>
         <p className="mt-2 text-lg">{n.summary}</p>

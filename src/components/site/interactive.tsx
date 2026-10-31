@@ -3,18 +3,19 @@ import { ExternalLink, CheckCircle2 } from "lucide-react";
 import { platformLabels, siteSettings } from "@/content/settings";
 import type { SocialPlatform } from "@/content/types";
 import { track } from "@/lib/analytics";
+import { safeExternalUrl } from "@/lib/url-safety";
 
 export function SocialLinks({ tone = "light" }: { tone?: "light" | "dark" }) {
   const entries = Object.entries(siteSettings.socials) as [SocialPlatform, string][];
-  const configured = entries.filter(([, url]) => url);
+  const configured = entries.filter(([, url]) => safeExternalUrl(url));
   return (
     <div>
       <ul className="flex flex-wrap gap-2">
         {entries.map(([platform, url]) => (
           <li key={platform}>
-            {url ? (
+            {safeExternalUrl(url) ? (
               <a
-                href={url}
+                href={safeExternalUrl(url)!}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => track("social_outbound_click", { platform, placement: "profile" })}

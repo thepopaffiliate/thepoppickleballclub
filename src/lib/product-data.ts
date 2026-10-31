@@ -1,5 +1,6 @@
 import type { Gear } from "@/content/types";
 import type { BudgetOption } from "@/content/gear-config";
+import { safeExternalUrl } from "@/lib/url-safety";
 
 /** Demo prices and undated amounts are not verified price estimates. */
 export function hasVerifiedPrice(g: Gear): g is Gear & { pricePHP: number; priceCheckedAt: string } {
@@ -13,7 +14,7 @@ export function fitsBudget(g: Gear, budget: BudgetOption) {
 
 /** Do not trim, parse, append query parameters, or otherwise normalize issued URLs. */
 export function getAffiliateDestination(g: Gear, channel: string) {
-  return g.affiliateDestinations?.[channel] ?? g.shopeeAffiliateUrl;
+  return safeExternalUrl(g.affiliateDestinations?.[channel] ?? g.shopeeAffiliateUrl);
 }
 
 export function getReviewLabel(g: Gear) {

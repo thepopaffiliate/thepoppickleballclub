@@ -1,3 +1,4 @@
+import { safeImageSrc } from "@/lib/url-safety";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, RotateCcw, Loader2 } from "lucide-react";
@@ -134,7 +135,7 @@ function Results({ answers, onJump }: { answers: FinderAnswers; onJump: (p: Part
         <ul className="mt-6 space-y-4">
           {matches.map(({ gear: g, reasons }) => (
             <li key={g.id} className="grid gap-4 rounded-2xl border bg-card p-4 shadow-card sm:grid-cols-[140px_1fr]">
-              {g.imageUrl ? <img src={g.imageUrl} alt={g.imageAlt} width={280} height={280} loading="lazy" className="aspect-square w-full rounded-xl object-cover" /> : <div className="aspect-square flex items-center justify-center rounded-xl bg-muted text-sm text-muted-foreground">Image not yet available</div>}
+              {safeImageSrc(g.imageUrl) ? <img src={safeImageSrc(g.imageUrl)!} alt={g.imageAlt} width={280} height={280} loading="lazy" className="aspect-square w-full rounded-xl object-cover" /> : <div className="aspect-square flex items-center justify-center rounded-xl bg-muted text-sm text-muted-foreground">Image not yet available</div>}
               <div>
                 <DemoBadge status={g.status} />
                 <h3 className="mt-1 font-ui text-lg font-bold">
