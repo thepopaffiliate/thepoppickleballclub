@@ -41,8 +41,15 @@ function Home() {
   return (
     <>
       <section className="relative overflow-hidden bg-night text-night-foreground">
-        <img src={hero} alt="" width={1600} height={1008} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover opacity-45" />
-        <div className="absolute inset-0 bg-gradient-to-t from-night via-night/70 to-transparent" aria-hidden />
+        <img
+          src={heroPhoto.url}
+          alt="Two pickleball paddles and three neon balls resting on a green court, with the net behind them"
+          width={1672}
+          height={941}
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover object-[50%_62%] opacity-90"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-night/90 via-night/45 to-night/75" aria-hidden />
         <div className="container-page relative pb-14 pt-28 md:pb-24 md:pt-44">
           <p className="eyebrow text-value">{siteSettings.tagline}</p>
           <h1 className="font-display mt-3 max-w-3xl text-7xl leading-[0.9] md:text-9xl">
