@@ -166,7 +166,7 @@ export const gear: Gear[] = [
   },
 ];
 
-export const visibleGear = gear.filter((g) => g.status !== "draft");
+export const visibleGear = gear.filter((g) => g.status === "published");
 
 export const categoryLabels: Record<Gear["category"], string> = {
   paddle: gearFinderConfig.paddle.label,

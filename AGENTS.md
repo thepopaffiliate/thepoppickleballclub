@@ -11,7 +11,7 @@
 
 ## Discovery architecture
 - Keep category-specific four-option budgets in `src/content/gear-config.ts`; use numeric bounds rather than legacy budget IDs for matching so each category can evolve independently.
-- Keep existing demo detail URLs and local content records for review, but filter Gear Finder, article product recommendations and news feeds to published evidence-backed data so placeholders cannot masquerade as recommendations.
+- Expose only status "published" records in public listings and detail routes (demo/draft slugs 404); demo records stay in source for tests only.
 - Use `src/lib/product-data.ts` for price eligibility, review labels and exact channel-aware affiliate selection so every discovery surface shares the same safety rules.
 - Use the existing `/stories` and `/news` routes for editorial and sourced updates; article gear blocks and related gear reuse product cards and `/gear/$slug` pages to avoid parallel discovery templates.
 - Use the Button component's site variants for modified controls to preserve the existing brand button styling without bypassing the shared design system.
