@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Sparkles } from "lucide-react";
-import hero from "@/assets/hero-court.jpg";
+import heroPhoto from "@/assets/pickleball-court-hero.png.asset.json";
 import { visibleGear } from "@/content/gear";
 import { gearFinderConfig, finderCategories } from "@/content/gear-config";
 import { visibleStories } from "@/content/stories";
