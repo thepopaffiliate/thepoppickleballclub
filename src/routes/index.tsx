@@ -47,9 +47,21 @@ function Home() {
           width={1672}
           height={941}
           fetchPriority="high"
-          className="absolute inset-0 h-full w-full object-cover object-[50%_62%] opacity-90"
+          className="absolute inset-0 hidden h-full w-full object-cover object-[50%_62%] md:block"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-night/90 via-night/45 to-night/75" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-b from-night/90 via-night/55 to-night/35" aria-hidden />
+        {/* Phone: the court reads as a full-width shelf at the bottom so both paddles and all three balls stay in frame */}
+        <div className="absolute inset-x-0 bottom-0 h-[28vw] overflow-hidden md:hidden">
+          <img
+            src={heroPhoto.url}
+            alt=""
+            width={1672}
+            height={941}
+            fetchPriority="high"
+            className="absolute inset-0 h-full w-full object-cover object-[50%_57%]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-night via-night/70 to-night/10" aria-hidden />
+        </div>
         <div className="container-page relative pb-14 pt-28 md:pb-24 md:pt-44">
           <p className="eyebrow text-value">{siteSettings.tagline}</p>
           <h1 className="font-display mt-3 max-w-3xl text-7xl leading-[0.9] md:text-9xl">
