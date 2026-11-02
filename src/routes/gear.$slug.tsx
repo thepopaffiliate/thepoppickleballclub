@@ -77,7 +77,7 @@ function GearDetail() {
             ))}
           </dl> : null}
           {g.listedSpecs.length > 0 && <>
-            <h2 className="font-ui mt-6 font-bold">Listed specifications</h2>
+            <h2 className="font-ui mt-6 font-bold">Manufacturer-listed specifications</h2>
             <p className="text-xs text-muted-foreground">Not independently verified{g.status === "demo" ? " — placeholder data only" : ""}.</p>
             <dl className="mt-3 divide-y rounded-xl border">{g.listedSpecs.map((s) => <div key={s.label} className="grid grid-cols-2 gap-2 p-3 text-sm"><dt className="text-muted-foreground">{s.label}</dt><dd className="font-semibold">{s.value}</dd></div>)}</dl>
           </>}
@@ -92,7 +92,7 @@ function GearDetail() {
               )}
               {g.cons.length > 0 && (
                 <div className="rounded-xl bg-accent p-4">
-                  <h2 className="font-ui font-bold text-primary-strong">Limitations{g.status === "demo" ? " (placeholder)" : ""}</h2>
+                  <h2 className="font-ui font-bold text-primary-strong">What to consider{g.status === "demo" ? " (placeholder)" : ""}</h2>
                   <ul className="mt-2 list-disc pl-5 text-sm">{g.cons.map((p) => <li key={p}>{p}</li>)}</ul>
                 </div>
               )}

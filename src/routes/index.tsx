@@ -122,9 +122,13 @@ function Home() {
 
       <section className="container-page mt-20">
         <SectionHead eyebrow="Buying Guides & Comparisons" title="Latest Reads" to="/stories" cta="All reads" />
-        <div className="grid gap-5 md:grid-cols-3">
-          {visibleStories.slice(0, 3).map((s) => <StoryCard key={s.id} s={s} />)}
-        </div>
+        {visibleStories.length ? (
+          <div className="grid gap-5 md:grid-cols-3">
+            {visibleStories.slice(0, 3).map((s) => <StoryCard key={s.id} s={s} />)}
+          </div>
+        ) : (
+          <EmptyState title="First reads are on the way" />
+        )}
       </section>
 
       <section className="container-page mt-20">

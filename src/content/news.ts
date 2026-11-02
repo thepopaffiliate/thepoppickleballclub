@@ -49,5 +49,5 @@ export const visibleNews = news
   .filter(isSourcedNews)
   .sort((a, b) => b.sourcePublishedAt.localeCompare(a.sourcePublishedAt));
 
-// Keep existing placeholder detail URLs available for review, but out of the news feed.
-export const getNewsBySlug = (slug: string) => news.find((n) => n.status !== "draft" && n.slug === slug);
+// Only sourced, published items have public detail pages.
+export const getNewsBySlug = (slug: string) => visibleNews.find((n) => n.slug === slug);

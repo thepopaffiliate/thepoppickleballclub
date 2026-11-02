@@ -66,7 +66,7 @@ function GearDirectory() {
   return (
     <>
       <PageIntro eyebrow="Budget Finds" title="Gear">
-        Estimated prices, last-checked dates, and simple notes when verified. Existing demo entries are placeholders, not recommendations.
+        Paddles, balls, bags and the rest — with estimated prices, the date we last checked them, and honest notes on what to consider.
       </PageIntro>
       <div className="container-page mt-8">
         <div className="grid gap-3 rounded-2xl border bg-card p-4 md:grid-cols-4">
@@ -112,7 +112,7 @@ function GearDirectory() {
             </div>
           ) : (
             <EmptyState title="Walang match">
-              <p>Try a different budget or category.</p>
+              <p>Nothing approved here yet. Try a different budget or category, or check back soon.</p>
               <Button variant="site" size="site" className="btn-night rounded-full mt-4" onClick={() => navigate({ search: {}, replace: true })}>Clear filters</Button>
             </EmptyState>
           )}

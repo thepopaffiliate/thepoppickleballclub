@@ -77,7 +77,7 @@ export const stories: Story[] = [
 export const storyCategories: StoryCategory[] = ["Beginner Tips", "Buying Guides", "Gear Guides", "Product Comparisons", "Court Lifestyle", "Filipino Pickleball"];
 
 export const visibleStories = stories
-  .filter((s) => s.status !== "draft")
+  .filter((s) => s.status === "published")
   .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 
 export const getStoryBySlug = (slug: string) => visibleStories.find((s) => s.slug === slug);
