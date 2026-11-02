@@ -60,7 +60,7 @@ function Home() {
             fetchPriority="high"
             className="absolute inset-0 h-full w-full object-cover object-[50%_100%]"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-night via-night/70 to-night/10" aria-hidden />
+          <div className="absolute inset-0 bg-gradient-to-b from-night via-night/50 to-transparent" aria-hidden />
         </div>
         <div className="container-page relative pb-28 pt-28 md:pb-24 md:pt-44">
           <p className="eyebrow text-value">{siteSettings.tagline}</p>
