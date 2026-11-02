@@ -51,14 +51,14 @@ function Home() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-night/85 via-night/40 to-night/20" aria-hidden />
         {/* Phone: the court reads as a full-width shelf at the bottom so both paddles and all three balls stay in frame */}
-        <div className="absolute inset-x-0 bottom-0 h-[29vw] overflow-hidden md:hidden">
+        <div className="absolute inset-x-0 bottom-0 h-[23vw] overflow-hidden md:hidden">
           <img
             src={heroPhoto.url}
             alt=""
             width={1672}
             height={941}
             fetchPriority="high"
-            className="absolute inset-0 h-full w-full object-cover object-[50%_73%]"
+            className="absolute inset-0 h-full w-full object-cover object-[50%_100%]"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-night via-night/70 to-night/10" aria-hidden />
         </div>
@@ -77,7 +77,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="container-page -mt-6 relative" aria-labelledby="budget-h">
+      <section className="container-page mt-0 relative md:-mt-6" aria-labelledby="budget-h">
         <div className="rounded-2xl bg-card p-5 shadow-card md:p-6">
           <h2 id="budget-h" className="font-ui font-bold">Browse by category</h2>
           <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
