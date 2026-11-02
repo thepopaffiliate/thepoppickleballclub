@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Sparkles } from "lucide-react";
-import hero from "@/assets/hero-court.jpg";
+import heroPhoto from "@/assets/pickleball-court-hero.png.asset.json";
 import { visibleGear } from "@/content/gear";
 import { gearFinderConfig, finderCategories } from "@/content/gear-config";
 import { visibleStories } from "@/content/stories";
@@ -41,9 +41,28 @@ function Home() {
   return (
     <>
       <section className="relative overflow-hidden bg-night text-night-foreground">
-        <img src={hero} alt="" width={1600} height={1008} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover opacity-45" />
-        <div className="absolute inset-0 bg-gradient-to-t from-night via-night/70 to-transparent" aria-hidden />
-        <div className="container-page relative pb-14 pt-28 md:pb-24 md:pt-44">
+        <img
+          src={heroPhoto.url}
+          alt="Two pickleball paddles and three neon balls resting on a green court, with the net behind them"
+          width={1672}
+          height={941}
+          fetchPriority="high"
+          className="absolute inset-0 hidden h-full w-full object-cover object-[50%_62%] md:block"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-night/85 via-night/40 to-night/20" aria-hidden />
+        {/* Phone: the court reads as a full-width shelf at the bottom so both paddles and all three balls stay in frame */}
+        <div className="absolute inset-x-0 bottom-0 h-[23vw] overflow-hidden md:hidden">
+          <img
+            src={heroPhoto.url}
+            alt=""
+            width={1672}
+            height={941}
+            fetchPriority="high"
+            className="absolute inset-0 h-full w-full object-cover object-[50%_100%]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-night via-night/25 via-20% to-transparent to-55%" aria-hidden />
+        </div>
+        <div className="container-page relative pb-28 pt-28 md:pb-24 md:pt-44">
           <p className="eyebrow text-value">{siteSettings.tagline}</p>
           <h1 className="font-display mt-3 max-w-3xl text-7xl leading-[0.9] md:text-9xl">
             Good gear.<br />Less <span className="text-primary">gastos.</span>
@@ -58,7 +77,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="container-page -mt-6 relative" aria-labelledby="budget-h">
+      <section className="container-page mt-0 relative md:-mt-6" aria-labelledby="budget-h">
         <div className="rounded-2xl bg-card p-5 shadow-card md:p-6">
           <h2 id="budget-h" className="font-ui font-bold">Browse by category</h2>
           <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
