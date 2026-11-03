@@ -6,10 +6,10 @@ export const siteSettings: SiteSettings = {
   name: "The Pop.",
   tagline: "play more. spend less.",
   socials: {
-    facebook: "",
-    instagram: "",
+    facebook: "https://www.facebook.com/profile.php?id=61595394297764",
+    instagram: "https://www.instagram.com/the_poppickleball/",
     "shopee-video": "",
-    tiktok: "",
+    tiktok: "https://www.tiktok.com/@thepoppickleballclub",
   },
   contactMethod: "",
   disclosureText:
