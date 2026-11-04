@@ -292,6 +292,238 @@ export const stories: Story[] = [
       }
     ]
   },
+  {
+    id: "s5",
+    slug: "pickleball-doubles-court-positioning",
+    title: "Where Should You Stand in Doubles Pickleball? A Beginner's Guide to Court Positioning",
+    summary: "Knowing how to hit the ball is only half the game. Learn where to stand, how to move with your partner, and why getting to the kitchen line can make a big difference in doubles pickleball.",
+    seoTitle: "Pickleball Doubles Positioning: Where Should You Stand?",
+    metaDescription: "Not sure where to stand in doubles pickleball? Learn court positioning, partner movement, kitchen line strategy, and common beginner mistakes.",
+    category: "Beginner Tips",
+    author: "The Pop.",
+    publishedAt: "2026-11-03",
+    updatedAt: "2026-11-03",
+    status: "published",
+    coverImageUrl: "",
+    coverImageAlt: "",
+    relatedGearIds: [],
+    content: [
+      { type: "p", text: "Ever played doubles pickleball and found yourself wondering why your partner is suddenly on the other side of the court?" },
+      { type: "p", text: "Or maybe both of you went for the same ball, leaving the opposite side wide open." },
+      { type: "p", text: "It happens." },
+      { type: "p", text: "When you're new to pickleball, most of your attention goes toward hitting the ball. You're thinking about your serve, your return, and whether you can get the ball over the net." },
+      { type: "p", text: "But there's another part of the game that can make a big difference: knowing where to stand." },
+      { type: "p", text: "Good court positioning helps you cover more space, work better with your partner, and avoid giving your opponents easy opportunities." },
+      { type: "p", text: "Let's break down the basics." },
+
+      { type: "h2", text: "1. Understand the Three Main Areas of the Court" },
+      { type: "p", text: "Before talking about positioning, it helps to understand the three areas you'll move through during a doubles rally." },
+
+      { type: "h3", text: "The baseline" },
+      { type: "p", text: "The baseline is the back boundary of the court." },
+      { type: "p", text: "You'll usually start behind or near this area when serving or returning serve." },
+      { type: "p", text: "From here, you have room to hit deep shots and prepare for the next ball." },
+
+      { type: "h3", text: "The transition zone" },
+      { type: "p", text: "This is the area between the baseline and the Non-Volley Zone line." },
+      { type: "p", text: "Some players call it No Man's Land." },
+      { type: "p", text: "It's an important area because you'll pass through it when moving toward the net, but you generally don't want to remain there for too long." },
+      { type: "p", text: "Why?" },
+      { type: "p", text: "Because opponents can target your feet with low or hard shots, making it difficult to return the ball comfortably." },
+
+      { type: "h3", text: "The kitchen line" },
+      { type: "p", text: "The kitchen line is the line separating the Non-Volley Zone (NVZ) from the rest of the court." },
+      { type: "p", text: "The Non-Volley Zone is the seven-foot area on each side of the net where volleying is restricted." },
+      { type: "p", text: "Reaching the kitchen line gives you a better position to participate in dink exchanges, intercept balls, and put pressure on your opponents." },
+      { type: "p", text: "This is why experienced players often work toward establishing a position near the kitchen line." },
+
+      { type: "h2", text: "2. Why Getting to the Kitchen Line Matters" },
+      { type: "p", text: "One of the most useful beginner lessons in pickleball is understanding the importance of the kitchen line." },
+      { type: "p", text: "When both members of a doubles team reach the line in a balanced position, they can:" },
+      { type: "ul", items: [
+        "Cover more attacking opportunities.",
+        "Play controlled dinks.",
+        "Respond to balls directed toward their feet.",
+        "Apply pressure through volleys.",
+        "Work together to protect the middle of the court."
+      ] },
+      { type: "p", text: "But there's a catch." },
+      { type: "p", text: "You shouldn't simply run toward the net after every shot." },
+      { type: "p", text: "Your movement should depend on the quality of the shot you just played." },
+      { type: "p", text: "A low, well-placed shot may give you time to move forward." },
+      { type: "p", text: "A high, attackable shot may force you to stay back and defend." },
+      { type: "p", text: "The goal isn't to reach the kitchen line as quickly as possible at any cost. It's to reach it without giving your opponents an easy opportunity to attack." },
+
+      { type: "h2", text: "3. Understand the Two-Bounce Rule" },
+      { type: "p", text: "The two-bounce rule is one of the main reasons doubles positioning looks different from other racket sports." },
+      { type: "p", text: "Here's how it works:" },
+      { type: "ol", items: [
+        "The serve must bounce on the receiving team's side.",
+        "The receiving team must return the ball, allowing it to bounce on the serving team's side.",
+        "Only after those two bounces can either team volley the ball."
+      ] },
+
+      { type: "h3", text: "If your team is serving" },
+      { type: "p", text: "After serving, stay prepared for the return to bounce." },
+      { type: "p", text: "Once your team plays its third shot, you can begin working toward the kitchen line." },
+      { type: "p", text: "A good third shot can give your team time to advance." },
+
+      { type: "h3", text: "If your team is receiving" },
+      { type: "p", text: "The returner should aim for a deep return and then work forward toward the kitchen line." },
+      { type: "p", text: "Your partner should also be prepared to support the move." },
+      { type: "p", text: "The receiving team often has an early positional advantage because it can establish a kitchen-line position before the serving team." },
+
+      { type: "h2", text: "4. Move Together With Your Partner" },
+      { type: "p", text: "Here's a simple rule that can improve your doubles positioning:" },
+      { type: "p", text: "When your partner moves, you should usually adjust too." },
+      { type: "p", text: "Imagine that you're both connected by an invisible line." },
+      { type: "p", text: "When your partner shifts toward the left side of the court, you also shift left to help protect the space being opened." },
+      { type: "p", text: "When the ball moves toward the right, you both adjust toward that side." },
+      { type: "p", text: "This doesn't mean you should stand shoulder to shoulder." },
+      { type: "p", text: "It means you should maintain useful spacing and avoid leaving large gaps between you." },
+
+      { type: "h3", text: "What happens when one player moves wide?" },
+      { type: "p", text: "Imagine your opponents hit a dink toward your partner near the sideline." },
+      { type: "p", text: "Your partner moves wide to reach the ball." },
+      { type: "p", text: "What should you do?" },
+      { type: "p", text: "You should slightly shift toward the middle to help cover the space your partner has left open." },
+      { type: "p", text: "If you remain in your original position, your opponents may have an easy opportunity to hit through the middle." },
+      { type: "p", text: "The important thing is to move without crowding your partner or blocking their recovery path." },
+
+      { type: "h2", text: "5. Who Should Take the Ball in the Middle?" },
+      { type: "p", text: "This is one of the most common sources of confusion in doubles." },
+      { type: "p", text: "Both players see the ball coming toward the middle." },
+      { type: "p", text: "Both move toward it." },
+      { type: "p", text: "And sometimes, neither ends up hitting it properly." },
+      { type: "p", text: "A useful starting principle is:" },
+      { type: "p", text: "The player with the forehand in the middle often takes priority." },
+      { type: "p", text: "However, this isn't an absolute rule." },
+      { type: "p", text: "You should also consider:" },
+      { type: "ul", items: [
+        "Which player is closer to the ball?",
+        "Who is better balanced?",
+        "Who has more time to prepare?",
+        "Which player has a clearer shot?",
+        "Are you playing with a left-handed partner?"
+      ] },
+      { type: "p", text: "For example, if your partner is moving forward and you're moving backward, your partner may be in a better position to take the ball even if it's closer to your forehand." },
+      { type: "p", text: "Communication matters too." },
+      { type: "p", text: "Use simple calls:" },
+      { type: "ul", items: [
+        "\"Mine!\" when you're taking the ball.",
+        "\"Yours!\" when your partner should take it.",
+        "\"Switch!\" when you need to exchange sides after a movement or scramble."
+      ] },
+      { type: "p", text: "Don't wait until both paddles are already moving toward the same ball." },
+      { type: "p", text: "Call early." },
+
+      { type: "h2", text: "6. Common Positioning Mistakes Beginners Make" },
+      { type: "p", text: "You don't need complicated strategies to improve your court positioning. Sometimes, fixing a few habits makes a noticeable difference." },
+
+      { type: "h3", text: "Mistake 1: Both players chase the ball" },
+      { type: "p", text: "When both partners move toward the same ball, they leave the rest of the court exposed." },
+      { type: "p", text: "What to do instead: Let one player handle the ball while the other adjusts to protect the open space." },
+
+      { type: "h3", text: "Mistake 2: Staying too far back" },
+      { type: "p", text: "If both teams have reached the kitchen line but you're still standing near the baseline, you may be giving your opponents more control over the rally." },
+      { type: "p", text: "What to do instead: Look for opportunities to move forward after a good return or controlled third shot." },
+
+      { type: "h3", text: "Mistake 3: Rushing forward behind a weak shot" },
+      { type: "p", text: "Running toward the kitchen line immediately after hitting a high or attackable ball can put you in a difficult position." },
+      { type: "p", text: "What to do instead: Watch your shot and judge whether you have enough time to advance safely." },
+
+      { type: "h3", text: "Mistake 4: Leaving the middle open" },
+      { type: "p", text: "Players sometimes focus so much on their assigned half of the court that they forget to protect the middle." },
+      { type: "p", text: "What to do instead: Adjust your position when your partner is pulled wide." },
+
+      { type: "h3", text: "Mistake 5: Standing too close to your partner" },
+      { type: "p", text: "You need enough space to swing your paddle and react independently." },
+      { type: "p", text: "What to do instead: Maintain comfortable spacing while staying connected as a team." },
+
+      { type: "h2", text: "7. Three Simple Drills to Improve Your Court Positioning" },
+      { type: "p", text: "You don't need a tournament to practice good positioning." },
+      { type: "p", text: "Try these drills during your next session." },
+
+      { type: "h3", text: "Drill 1: Shadow Movement" },
+      { type: "p", text: "What you need: Two players and a court." },
+      { type: "p", text: "How to do it:" },
+      { type: "ol", items: [
+        "Both players start near the kitchen line.",
+        "One player or coach points toward different areas of the court.",
+        "Both players move together in the indicated direction.",
+        "Maintain your spacing throughout the exercise."
+      ] },
+      { type: "p", text: "The goal is to develop the habit of moving together rather than independently." },
+
+      { type: "h3", text: "Drill 2: The Middle Ball Drill" },
+      { type: "p", text: "What you need: Two players on one side and a feeder on the opposite side." },
+      { type: "p", text: "How to do it:" },
+      { type: "ol", items: [
+        "The feeder sends balls toward the middle.",
+        "Both players must decide who takes each ball.",
+        "Call \"Mine\" or \"Yours\" before making contact.",
+        "Switch responsibilities and repeat."
+      ] },
+      { type: "p", text: "The goal is to improve communication and reduce hesitation." },
+
+      { type: "h3", text: "Drill 3: Move Up to the Kitchen" },
+      { type: "p", text: "What you need: Four players or two players and a ball feeder." },
+      { type: "p", text: "How to do it:" },
+      { type: "ol", items: [
+        "Begin near the baseline.",
+        "Feed a third-shot opportunity.",
+        "Play a controlled shot.",
+        "Advance only when the shot gives you enough time.",
+        "Stop and prepare for the next ball."
+      ] },
+      { type: "p", text: "The goal is to understand that moving forward is a decision, not an automatic reaction." },
+
+      { type: "h2", text: "The Pop. Takeaway" },
+      { type: "p", text: "Doubles pickleball isn't just about getting the ball over the net." },
+      { type: "p", text: "It's about understanding the space around you, knowing when to move, and working with your partner instead of competing for the same ball." },
+      { type: "p", text: "Start with three habits:" },
+      { type: "ol", items: [
+        "Work toward the kitchen line when the opportunity is there.",
+        "Move with your partner to protect open spaces.",
+        "Communicate before either player commits to a difficult ball."
+      ] },
+      { type: "p", text: "You don't need advanced strategies to start playing smarter." },
+      { type: "p", text: "Sometimes, the biggest improvement comes from simply knowing where to stand." },
+      { type: "p", text: "Play smart. Move together. See you on the court." },
+
+      { type: "h2", text: "Sources & References" },
+      {
+        type: "sources",
+        items: [
+          {
+            name: "USA Pickleball — Pickleball Basics: Positioning, Patience, and Kitchen Line Strategy",
+            url: "https://usapickleball.org/pickleball-skills/level-two/pickleball-basics-positioning-tips/",
+            note: "Kitchen-line positioning, two-bounce rule, transition zone, partner spacing, and split-step basics."
+          },
+          {
+            name: "USA Pickleball — Official Rules",
+            url: "https://usapickleball.org/what-is-pickleball/official-rules/",
+            note: "Non-Volley Zone and two-bounce rule definitions."
+          },
+          {
+            name: "PickleTip — Pickleball Positioning: Where to Stand, Move, and Recover in Doubles",
+            url: "https://www.pickletip.com/pickleball-positioning/",
+            note: "Partner movement, recovery, middle coverage, and situational positioning."
+          },
+          {
+            name: "PickleTip — Pickleball Doubles Communication: Calls and Signals",
+            url: "https://www.pickletip.com/pickleball-doubles-communication/",
+            note: "Communication timing and partner coordination."
+          },
+          {
+            name: "World Pickleball Federation — Play Pickleball: A Beginner's Guide",
+            url: "https://www.worldpickleballfederation.org/wp-content/uploads/2021/07/Final-WPF-61220-In2Pickle_Play_Pickleball_Beginner_Guide_eBook.pdf",
+            note: "Beginner doubles positioning and fundamental strategy."
+          }
+        ]
+      }
+    ]
+  },
 ];
 
 export const storyCategories: StoryCategory[] = ["Beginner Tips", "Buying Guides", "Gear Guides", "Product Comparisons", "Court Lifestyle", "Filipino Pickleball"];
