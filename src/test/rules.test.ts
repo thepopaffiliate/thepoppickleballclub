@@ -111,9 +111,9 @@ describe("Product evidence and affiliate destinations", () => {
 });
 
 describe("Sourced news only", () => {
-  it("excludes demo placeholders from What's Happening", () => {
-    expect(visibleNews).toEqual([]);
-    expect(news.every((n) => !isSourcedNews(n))).toBe(true);
+  it("shows only the five sourced, published items in What's Happening and no demo placeholders", () => {
+    expect(visibleNews.map((n) => n.id).sort()).toEqual(["n3", "n4", "n5", "n6", "n7"]);
+    expect(news.filter((n) => n.status !== "published").every((n) => !isSourcedNews(n))).toBe(true);
   });
 
   it("requires published status, source name, destination and dates", () => {
