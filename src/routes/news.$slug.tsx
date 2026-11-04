@@ -39,7 +39,7 @@ function NewsPage() {
       <h1 className="font-display mt-3 text-5xl md:text-6xl">{n.title}</h1>
       <div className="mt-5 rounded-2xl border-l-4 border-primary bg-muted p-4 text-sm">
         <p><strong>Source:</strong> {n.sourceName}</p>
-        <p><strong>Published by source:</strong> {formatDate(n.sourcePublishedAt)} · <strong>Checked:</strong> {formatDate(n.checkedAt)}</p>
+        <p><strong>Published by source:</strong> {n.sourcePublishedAt ? formatDate(n.sourcePublishedAt) : "Source date not shown"} · <strong>Checked:</strong> {formatDate(n.checkedAt)}</p>
         {safeExternalUrl(n.sourceUrl) ? (
           <a href={safeExternalUrl(n.sourceUrl)!} target="_blank" rel="noopener noreferrer" className="btn btn-night mt-3">Read the original <ExternalLink className="size-4" aria-hidden /></a>
         ) : <p className="mt-2 text-muted-foreground">Original source link not added yet.</p>}

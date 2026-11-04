@@ -59,13 +59,17 @@ export type ContentBlock =
   | { type: "ul"; items: string[] }
   | { type: "ol"; items: string[] }
   | { type: "img"; src: string; alt: string; caption?: string }
-  | { type: "gear"; gearIds: string[] };
+  | { type: "gear"; gearIds: string[] }
+  | { type: "table"; headers: string[]; rows: string[][] }
+  | { type: "sources"; items: { name: string; url: string; note?: string }[] };
 
 export interface Story {
   id: string;
   slug: string;
   title: string;
   summary: string;
+  seoTitle?: string;
+  metaDescription?: string;
   category: StoryCategory;
   content: ContentBlock[];
   coverImageUrl: string;
@@ -87,7 +91,7 @@ export interface NewsItem {
   summary: string;
   sourceName: string;
   sourceUrl: string;
-  sourcePublishedAt: string;
+  sourcePublishedAt?: string;
   checkedAt: string;
   editorialNote: string;
   category: NewsCategory;

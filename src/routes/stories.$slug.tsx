@@ -1,4 +1,4 @@
-import { safeImageSrc } from "@/lib/url-safety";
+import { safeExternalUrl, safeImageSrc } from "@/lib/url-safety";
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { getStoryBySlug, visibleStories } from "@/content/stories";
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/stories/$slug")({
   },
   head: ({ loaderData, params }) =>
     loaderData
-      ? pageMeta({ title: loaderData.s.title, description: loaderData.s.summary, path: `/stories/${params.slug}`, type: "article", image: loaderData.s.coverImageUrl, noindex: loaderData.s.status !== "published" })
+      ? pageMeta({ title: loaderData.s.seoTitle || loaderData.s.title, description: loaderData.s.metaDescription || loaderData.s.summary, path: `/stories/${params.slug}`, type: "article", image: loaderData.s.coverImageUrl, noindex: loaderData.s.status !== "published" })
       : pageMeta({ title: "Read unavailable", description: "This read is currently unavailable on The Pop.", path: `/stories/${params.slug}`, noindex: true }),
   component: StoryPage,
   notFoundComponent: () => (
@@ -59,6 +59,27 @@ function StoryPage() {
               const products = getGearByIds(b.gearIds);
               return products.length ? <section key={i} className="my-6"><div className="grid gap-4 sm:grid-cols-2">{products.map((g) => <GearCard key={g.id} g={g} placement="story_inline" />)}</div><div className="mt-3"><Disclosure compact /></div></section> : null;
             }
+            case "table": return (
+              <div key={i} className="my-6 overflow-x-auto">
+                <table>
+                  <thead><tr>{b.headers.map((h, j) => <th key={j} scope="col">{h}</th>)}</tr></thead>
+                  <tbody>{b.rows.map((r, j) => <tr key={j}>{r.map((c, k) => <td key={k}>{c}</td>)}</tr>)}</tbody>
+                </table>
+              </div>
+            );
+            case "sources": return (
+              <ul key={i}>
+                {b.items.map((it, j) => {
+                  const href = safeExternalUrl(it.url);
+                  return (
+                    <li key={j}>
+                      {href ? <a href={href} target="_blank" rel="noopener noreferrer">{it.name}</a> : it.name}
+                      {it.note && <span className="block text-sm text-muted-foreground">{it.note}</span>}
+                    </li>
+                  );
+                })}
+              </ul>
+            );
             case "img": return (
               <figure key={i} className="my-6">
                 {safeImageSrc(b.src) && <img src={safeImageSrc(b.src)!} alt={b.alt} width={1200} height={800} loading="lazy" className="rounded-2xl" />}
