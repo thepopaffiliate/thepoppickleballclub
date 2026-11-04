@@ -200,3 +200,8 @@
 .prose-pop ul { list-style: disc; padding-left: 1.25rem; margin: 0 0 1rem; }
 .prose-pop ol { list-style: decimal; padding-left: 1.25rem; margin: 0 0 1rem; }
 .prose-pop li { margin-bottom: 0.35rem; }
+.prose-pop table { width: 100%; min-width: 32rem; border-collapse: collapse; font-size: 0.9rem; }
+.prose-pop th, .prose-pop td { text-align: left; vertical-align: top; padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--color-border); }
+.prose-pop th { background: var(--color-muted); font-family: var(--font-ui); font-weight: 700; font-size: 0.8rem; }
+.prose-pop a { color: var(--color-primary-strong); text-decoration: underline; text-underline-offset: 2px; }
+.prose-pop a:hover { text-decoration-thickness: 2px; }
