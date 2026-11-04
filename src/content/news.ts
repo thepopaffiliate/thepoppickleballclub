@@ -42,12 +42,12 @@ export const news: NewsItem[] = [
 
 export function isSourcedNews(n: NewsItem) {
   return n.status === "published" && Boolean(n.sourceName.trim()) && /^https?:\/\/\S+$/i.test(n.sourceUrl) &&
-    Number.isFinite(Date.parse(n.sourcePublishedAt)) && Number.isFinite(Date.parse(n.checkedAt));
+    (n.sourcePublishedAt === undefined || n.sourcePublishedAt === "" || Number.isFinite(Date.parse(n.sourcePublishedAt))) && Number.isFinite(Date.parse(n.checkedAt));
 }
 
 export const visibleNews = news
   .filter(isSourcedNews)
-  .sort((a, b) => b.sourcePublishedAt.localeCompare(a.sourcePublishedAt));
+  .sort((a, b) => (b.sourcePublishedAt || b.checkedAt).localeCompare(a.sourcePublishedAt || a.checkedAt));
 
 // Only sourced, published items have public detail pages.
 export const getNewsBySlug = (slug: string) => visibleNews.find((n) => n.slug === slug);

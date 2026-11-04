@@ -157,7 +157,7 @@ export function NewsCard({ n }: { n: NewsItem }) {
       </h3>
       <p className="mt-2 text-sm text-muted-foreground">{n.summary}</p>
       <p className="mt-3 text-xs text-muted-foreground">
-        <span className="font-semibold text-foreground">Source:</span> {n.sourceName} · Published by source {formatDate(n.sourcePublishedAt)} · Checked {formatDate(n.checkedAt)}
+        <span className="font-semibold text-foreground">Source:</span> {n.sourceName} · {n.sourcePublishedAt ? `Published by source ${formatDate(n.sourcePublishedAt)}` : "Source date not shown"} · Checked {formatDate(n.checkedAt)}
       </p>
     </article>
   );
