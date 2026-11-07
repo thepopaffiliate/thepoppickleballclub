@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
 import heroPhoto from "@/assets/pickleball-court-hero.png.asset.json";
 import { visibleGear } from "@/content/gear";
@@ -36,46 +37,88 @@ function SectionHead({ eyebrow, title, to, cta }: { eyebrow: string; title: stri
   );
 }
 
+function HeroParallax() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const backgroundRef = useRef<HTMLImageElement>(null);
+  const paddlesRef = useRef<HTMLImageElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const background = backgroundRef.current;
+    const paddles = paddlesRef.current;
+    const content = contentRef.current;
+    if (!section || !background || !paddles || !content) return;
+
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const rect = section.getBoundingClientRect();
+      const progress = Math.max(-1, Math.min(1, (window.innerHeight / 2 - (rect.top + rect.height / 2)) / (rect.height / 2)));
+      background.style.transform = `translate3d(0, ${progress * 12}px, 0) scale(1.04)`;
+      paddles.style.transform = `translate3d(0, ${progress * -34}px, 0)`;
+      content.style.transform = `translate3d(0, ${progress * -8}px, 0)`;
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  return (
+    <section ref={sectionRef} className="relative min-h-[680px] overflow-hidden bg-night text-night-foreground md:min-h-[760px]" aria-labelledby="hero-heading">
+      <img
+        ref={backgroundRef}
+        src={heroPhoto.url}
+        alt=""
+        width={1672}
+        height={941}
+        fetchPriority="high"
+        className="absolute inset-0 h-full w-full scale-[1.04] object-cover object-[50%_62%] will-change-transform"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-night/65 via-night/20 to-night/45" aria-hidden />
+
+      <div className="absolute inset-0 flex items-center justify-center overflow-hidden" aria-hidden>
+        <img
+          ref={paddlesRef}
+          src={heroPhoto.url}
+          alt=""
+          width={1672}
+          height={941}
+          className="absolute left-1/2 top-[52%] h-[78%] w-[116%] max-w-none -translate-x-1/2 object-cover object-[50%_66%] will-change-transform md:h-[88%] md:w-[108%]"
+          style={{ clipPath: "inset(43% 18% 3% 18% round 3rem)" }}
+        />
+      </div>
+
+      <div ref={contentRef} className="container-page relative z-20 flex min-h-[680px] flex-col items-center justify-center py-20 text-center md:min-h-[760px] will-change-transform">
+        <p className="eyebrow text-value">{siteSettings.tagline}</p>
+        <h1 id="hero-heading" className="font-display mt-3 max-w-4xl text-6xl leading-[0.9] sm:text-7xl md:text-9xl">
+          Good gear.<br />Less <span className="text-primary">gastos.</span>
+        </h1>
+        <p className="mt-5 max-w-2xl text-lg opacity-90 md:text-xl">
+          Affordable pickleball finds, useful guides, at kung ano ang nangyayari sa Filipino pickleball scene.
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <Link to="/gear-finder" className="btn btn-primary">Find your gear <ArrowRight className="size-4" aria-hidden /></Link>
+          <Link to="/stories" className="btn btn-outline text-night-foreground">Explore Latest Reads</Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Home() {
   const featured = visibleGear.filter((g) => g.featured).slice(0, 4);
   return (
     <>
-      <section className="relative overflow-hidden bg-night text-night-foreground">
-        <img
-          src={heroPhoto.url}
-          alt="Two pickleball paddles and three neon balls resting on a green court, with the net behind them"
-          width={1672}
-          height={941}
-          fetchPriority="high"
-          className="absolute inset-0 hidden h-full w-full object-cover object-[50%_62%] md:block"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-night/85 via-night/40 to-night/20" aria-hidden />
-        {/* Phone: the court reads as a full-width shelf at the bottom so both paddles and all three balls stay in frame */}
-        <div className="absolute inset-x-0 bottom-0 h-[23vw] overflow-hidden md:hidden">
-          <img
-            src={heroPhoto.url}
-            alt=""
-            width={1672}
-            height={941}
-            fetchPriority="high"
-            className="absolute inset-0 h-full w-full object-cover object-[50%_100%]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-night via-night/25 via-20% to-transparent to-55%" aria-hidden />
-        </div>
-        <div className="container-page relative pb-28 pt-28 md:pb-24 md:pt-44">
-          <p className="eyebrow text-value">{siteSettings.tagline}</p>
-          <h1 className="font-display mt-3 max-w-3xl text-7xl leading-[0.9] md:text-9xl">
-            Good gear.<br />Less <span className="text-primary">gastos.</span>
-          </h1>
-          <p className="mt-5 max-w-xl text-lg opacity-90">
-            Affordable pickleball finds, useful guides, at kung ano ang nangyayari sa Filipino pickleball scene.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/gear-finder" className="btn btn-primary">Find your gear <ArrowRight className="size-4" aria-hidden /></Link>
-            <Link to="/stories" className="btn btn-outline text-night-foreground">Explore Latest Reads</Link>
-          </div>
-        </div>
-      </section>
+      <HeroParallax />
 
       <section className="container-page mt-0 relative md:-mt-6" aria-labelledby="budget-h">
         <div className="rounded-2xl bg-card p-5 shadow-card md:p-6">
