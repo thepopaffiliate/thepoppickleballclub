@@ -103,15 +103,32 @@
   html {
     -webkit-text-size-adjust: 100%;
   }
+  @keyframes pop-gradient-drift {
+    0%, 100% {
+      background-position: 0% 0%, 100% 40%, 0% 0%;
+    }
+    50% {
+      background-position: 18% 34%, 82% 18%, 100% 100%;
+    }
+  }
+
   body {
     background:
       radial-gradient(circle at 12% 18%, color-mix(in oklab, var(--rally-pink) 7%, transparent) 0%, transparent 30%),
       radial-gradient(circle at 88% 42%, color-mix(in oklab, var(--court-green) 7%, transparent) 0%, transparent 32%),
       linear-gradient(180deg, #ffffff 0%, var(--blush-raw) 38%, #ffffff 68%, color-mix(in oklab, var(--court-green) 3%, #ffffff) 100%);
+    background-size: 140% 140%, 140% 140%, 100% 100%;
     background-attachment: fixed;
+    animation: pop-gradient-drift 18s ease-in-out infinite;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     line-height: 1.6;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body {
+      animation: none;
+    }
   }
   h1, h2, h3 {
     line-height: 1.05;
