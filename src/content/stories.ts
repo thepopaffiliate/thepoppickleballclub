@@ -524,6 +524,363 @@ export const stories: Story[] = [
       }
     ]
   },
+  {
+    id: "s6",
+    slug: "pickleball-running-shoes-vs-court-shoes",
+    title: "Can You Play Pickleball in Running Shoes? What Your Footwear Actually Needs",
+    summary:
+      "Your running shoes might be comfortable, but are they suitable for pickleball? Learn the difference between running and court shoes, why lateral support matters, and what to consider before buying your next pair.",
+    seoTitle: "Can You Play Pickleball in Running Shoes? Here's What to Know",
+    metaDescription:
+      "Can you play pickleball in running shoes? Learn why court shoes offer better lateral support, what features to look for, and how to choose footwear for indoor and outdoor play.",
+    category: "Buying Guides",
+    author: "The Pop.",
+    publishedAt: "2026-11-03",
+    updatedAt: "2026-11-03",
+    status: "published",
+    coverImageUrl: "",
+    coverImageAlt: "",
+    relatedGearIds: [],
+    content: [
+      { type: "p", text: "You've got your paddle, your balls, and a court reservation." },
+      { type: "p", text: "There's just one thing left: what shoes should you wear?" },
+      {
+        type: "p",
+        text: "If you're new to pickleball, you might be tempted to use the running shoes already sitting in your closet. They're comfortable, familiar, and you probably don't want to spend more money on another pair of sports shoes.",
+      },
+      { type: "p", text: "Fair enough." },
+      { type: "p", text: "But here's something worth considering: pickleball involves a lot more than running forward." },
+      {
+        type: "p",
+        text: "You'll move sideways, stop suddenly, change direction, and sometimes reach for balls that seem determined to land just outside your comfort zone.",
+      },
+      { type: "p", text: "That's why footwear matters." },
+      {
+        type: "p",
+        text: "So, can you play pickleball in running shoes? Technically, yes. But for regular play, court shoes are generally the better choice.",
+      },
+      { type: "p", text: "Let's look at why." },
+
+      { type: "h2", text: "1. Why Running Shoes Aren't Designed for Pickleball" },
+      { type: "p", text: "Running shoes are designed primarily for forward movement." },
+      {
+        type: "p",
+        text: "Their construction generally prioritizes cushioning, comfort, and support during repetitive strides.",
+      },
+      { type: "p", text: "Pickleball involves a different kind of movement." },
+      { type: "p", text: "During a typical rally, you might:" },
+      {
+        type: "ul",
+        items: [
+          "Move quickly toward the kitchen line.",
+          "Shuffle sideways to reach a dink.",
+          "Stop suddenly when your opponent hits a short ball.",
+          "Pivot to return a shot.",
+          "Move backward to retrieve a lob.",
+        ],
+      },
+      { type: "p", text: "These movements place different demands on your footwear." },
+      {
+        type: "p",
+        text: "Running shoes may not provide the same lateral stability as shoes designed for court sports.",
+      },
+
+      { type: "h3", text: "What is lateral support?" },
+      {
+        type: "p",
+        text: "Lateral support refers to how well a shoe helps support your foot during side-to-side movements.",
+      },
+      { type: "p", text: "Imagine moving quickly toward the right to reach a ball." },
+      {
+        type: "p",
+        text: "Your foot needs to remain stable inside the shoe while your body changes direction.",
+      },
+      {
+        type: "p",
+        text: "A running shoe designed mainly for forward movement may not provide the same support during this type of movement.",
+      },
+      {
+        type: "p",
+        text: "This is one reason sports medicine professionals generally recommend court-specific footwear for sports involving frequent lateral movement.",
+      },
+      {
+        type: "p",
+        text: "The American Medical Association also highlights the differences between running and tennis shoes, particularly their side support, outsole firmness, and suitability for sudden changes in direction.",
+      },
+
+      { type: "h2", text: "2. Running Shoes vs. Court Shoes: What's the Difference?" },
+      { type: "p", text: "Here's a simple comparison." },
+      {
+        type: "table",
+        headers: ["Feature", "Running shoes", "Court shoes"],
+        rows: [
+          ["Main purpose", "Forward movement", "Multi-directional movement"],
+          ["Cushioning", "Usually a major priority", "Varies by model"],
+          ["Lateral support", "Generally less specialized", "Designed for side-to-side movement"],
+          ["Outsole", "Designed for running surfaces", "Designed for court traction"],
+          ["Stability", "Optimized for running mechanics", "Optimized for cutting and stopping"],
+          ["Pickleball suitability", "Not ideal for regular play", "Generally preferred"],
+        ],
+      },
+      {
+        type: "p",
+        text: "The biggest difference isn't which shoe feels softer or more comfortable.",
+      },
+      {
+        type: "p",
+        text: "It's whether the shoe is designed for the movements you're actually making.",
+      },
+      {
+        type: "p",
+        text: "A running shoe can feel great when walking onto the court but still be less suitable once a fast rally begins.",
+      },
+
+      { type: "h2", text: "3. What Should You Look for in Pickleball Shoes?" },
+      { type: "p", text: "You don't necessarily need a shoe specifically branded for pickleball." },
+      {
+        type: "p",
+        text: "Tennis shoes and other suitable court shoes can also work, depending on the playing surface.",
+      },
+      { type: "p", text: "Here are the features worth paying attention to." },
+
+      { type: "h3", text: "Lateral stability" },
+      { type: "p", text: "This should be one of your priorities." },
+      { type: "p", text: "Look for a shoe that feels secure when moving sideways." },
+      {
+        type: "p",
+        text: "Your foot shouldn't slide excessively inside the shoe when you change direction.",
+      },
+
+      { type: "h3", text: "Good traction" },
+      { type: "p", text: "You need enough grip to move confidently without slipping." },
+      { type: "p", text: "However, more grip isn't automatically better." },
+      {
+        type: "p",
+        text: "The outsole should be appropriate for the court surface you're playing on.",
+      },
+
+      { type: "h3", text: "Comfortable cushioning" },
+      { type: "p", text: "Pickleball involves repeated movement and sudden stops." },
+      {
+        type: "p",
+        text: "A comfortable level of cushioning can help make longer sessions more enjoyable.",
+      },
+      { type: "p", text: "Don't assume that the softest shoe is necessarily the best one." },
+
+      { type: "h3", text: "A secure fit" },
+      { type: "p", text: "Your heel should feel stable, and your toes should have enough room." },
+      {
+        type: "p",
+        text: "A shoe that is too loose can allow unnecessary movement inside the shoe.",
+      },
+      {
+        type: "p",
+        text: "One that's too tight can become uncomfortable during longer games.",
+      },
+
+      { type: "h3", text: "Durable construction" },
+      {
+        type: "p",
+        text: "If you play frequently, consider the outsole and materials that experience the most wear.",
+      },
+      {
+        type: "p",
+        text: "A suitable court shoe should hold up to the movements and surfaces you regularly encounter.",
+      },
+
+      { type: "h2", text: "4. Are Tennis Shoes Good for Pickleball?" },
+      {
+        type: "p",
+        text: "Yes. In fact, tennis shoes are among the most practical footwear options for pickleball.",
+      },
+      { type: "p", text: "Both sports involve:" },
+      {
+        type: "ul",
+        items: [
+          "Side-to-side movement.",
+          "Sudden changes in direction.",
+          "Quick starts and stops.",
+          "Forward and backward movement.",
+          "Repeated movement around a court.",
+        ],
+      },
+      { type: "p", text: "Tennis shoes are designed with these demands in mind." },
+      {
+        type: "p",
+        text: "You don't necessarily have to buy a separate pickleball-branded shoe if you already own a suitable pair of tennis or court shoes.",
+      },
+      {
+        type: "p",
+        text: "Just make sure the outsole is appropriate for your playing surface.",
+      },
+
+      { type: "h2", text: "5. What About Badminton and Volleyball Shoes?" },
+      {
+        type: "p",
+        text: "This is where things become interesting for players who mostly use indoor facilities.",
+      },
+      { type: "p", text: "Badminton and volleyball shoes are also designed for court-based movement." },
+      {
+        type: "p",
+        text: "They can be suitable options for indoor pickleball, depending on their fit, construction, and outsole.",
+      },
+      { type: "p", text: "However, the playing surface matters." },
+
+      { type: "h3", text: "For indoor pickleball" },
+      {
+        type: "p",
+        text: "Badminton or volleyball shoes may be appropriate for smooth indoor courts.",
+      },
+      {
+        type: "p",
+        text: "They are designed for movements that involve quick direction changes and court traction.",
+      },
+
+      { type: "h3", text: "For outdoor pickleball" },
+      {
+        type: "p",
+        text: "Look for tennis or outdoor court shoes designed for the surface you're playing on.",
+      },
+      {
+        type: "p",
+        text: "Indoor court shoes may wear more quickly when repeatedly used on rough outdoor surfaces.",
+      },
+
+      { type: "h3", text: "If you play both indoors and outdoors" },
+      {
+        type: "p",
+        text: "An outdoor-compatible court shoe can be a practical option, provided its outsole works on the indoor surface as well.",
+      },
+      { type: "p", text: "Check the manufacturer's surface recommendations before buying." },
+
+      { type: "h2", text: "6. What If You Can't Afford New Pickleball Shoes Yet?" },
+      { type: "p", text: "Let's be practical." },
+      {
+        type: "p",
+        text: "Not everyone wants to buy another pair of shoes immediately after getting into pickleball.",
+      },
+      { type: "p", text: "And that's okay." },
+      { type: "p", text: "If you're just starting, here's what you can do:" },
+      { type: "p", text: "First, check what you already own." },
+      {
+        type: "p",
+        text: "You may already have tennis shoes or suitable court shoes from another sport.",
+      },
+      { type: "p", text: "Second, consider indoor court footwear." },
+      {
+        type: "p",
+        text: "If you mainly play on smooth indoor courts, suitable badminton or volleyball shoes may be worth considering.",
+      },
+      { type: "p", text: "Third, prioritize function over branding." },
+      {
+        type: "p",
+        text: "A shoe doesn't need a pickleball logo to be appropriate for the sport.",
+      },
+      { type: "p", text: "Focus on stability, traction, fit, and the playing surface." },
+      { type: "p", text: "Fourth, don't buy solely because of a marketplace description." },
+      {
+        type: "p",
+        text: "Look for actual information about the shoe's intended sport and outsole.",
+      },
+      {
+        type: "p",
+        text: "A listing that says \"pickleball shoes\" doesn't automatically mean the shoe offers the right construction.",
+      },
+      {
+        type: "p",
+        text: "And if your only available footwear is a running shoe, understand its limitations rather than assuming it's an ideal long-term option.",
+      },
+      {
+        type: "p",
+        text: "For frequent play, investing in suitable court footwear is a sensible priority.",
+      },
+
+      { type: "h2", text: "7. How to Tell If Your Shoes Are Suitable for Pickleball" },
+      { type: "p", text: "Before taking a new pair to the court, consider these questions:" },
+      {
+        type: "ul",
+        items: [
+          "Does the shoe feel secure when moving sideways?",
+          "Does your heel stay in place?",
+          "Is there enough room around your toes?",
+          "Does the outsole suit your playing surface?",
+          "Can you change direction without your foot sliding excessively inside the shoe?",
+          "Does the shoe feel stable when stopping?",
+        ],
+      },
+      { type: "p", text: "Try the shoes on and walk around in them first." },
+      {
+        type: "p",
+        text: "If possible, test gentle side-to-side movements in a safe area.",
+      },
+      {
+        type: "p",
+        text: "Avoid using a shoe that feels unstable, slips excessively, or causes discomfort.",
+      },
+      {
+        type: "p",
+        text: "If you have existing foot or ankle problems, consider getting professional advice about appropriate footwear.",
+      },
+
+      { type: "h2", text: "The Pop. Takeaway" },
+      {
+        type: "p",
+        text: "You can technically step onto a pickleball court wearing running shoes, but that doesn't make them the best option.",
+      },
+      {
+        type: "p",
+        text: "Pickleball requires frequent lateral movement, quick stops, and changes in direction. Court shoes are designed with those movements in mind.",
+      },
+      { type: "p", text: "The good news?" },
+      {
+        type: "p",
+        text: "You don't need to buy something specifically marketed as a pickleball shoe.",
+      },
+      {
+        type: "p",
+        text: "A suitable pair of tennis shoes, or appropriate indoor court shoes, may already do the job.",
+      },
+      {
+        type: "p",
+        text: "Before spending your money, check the fit, stability, traction, and playing surface.",
+      },
+      { type: "p", text: "Your paddle helps you hit the ball." },
+      { type: "p", text: "Your shoes help you get into position to hit it." },
+      { type: "p", text: "Play smart. Move confidently. See you on the court." },
+
+      { type: "h2", text: "Sources & References" },
+      {
+        type: "sources",
+        items: [
+          {
+            name: "American Medical Association — What doctors want patients to know about preventing pickleball injuries",
+            url: "https://www.ama-assn.org/public-health/prevention-wellness/what-doctors-want-patients-know-about-preventing-pickleball",
+            note: "Why court and tennis shoes are generally preferable to running shoes for pickleball, particularly regarding lateral support and sudden directional changes.",
+          },
+          {
+            name: "World Pickleball Federation — Play Pickleball: A Beginner's Guide",
+            url: "https://www.worldpickleballfederation.org/wp-content/uploads/2021/07/Final-WPF-61220-In2Pickle_Play_Pickleball_Beginner_Guide_eBook.pdf",
+            note: "Pickleball footwear recommendations, differences between court shoes and jogging shoes, and indoor/outdoor shoe considerations.",
+          },
+          {
+            name: "Pickleball: Injury Considerations in an Increasingly Popular Sport",
+            url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6913863/",
+            note: "Footwear considerations, lateral stability, and the importance of suitable shoe fit during pickleball.",
+          },
+          {
+            name: "South Carolina Sports Medicine and Orthopaedic Center — Athletic Shoe Selection",
+            url: "https://scsportsmedicine.com/patient-information/health-information/athletic-shoe-selection",
+            note: "Differences between running, cross-training, and court shoes, including the importance of shoe construction for different movement patterns.",
+          },
+          {
+            name: "American Podiatric Medical Association — Choosing Shoes for Sports",
+            url: "https://www.apma.org/patients-and-the-public/tips-for-healthy-feet/choosing-shoes-for-sports/",
+            note: "Choosing footwear according to the activity and movement demands.",
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export const storyCategories: StoryCategory[] = ["Beginner Tips", "Buying Guides", "Gear Guides", "Product Comparisons", "Court Lifestyle", "Filipino Pickleball"];
