@@ -85,18 +85,6 @@ function HeroParallax() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-night/65 via-night/20 to-night/45" aria-hidden />
 
-      <div className="absolute inset-0 flex items-center justify-center overflow-hidden" aria-hidden>
-        <img
-          ref={paddlesRef}
-          src={heroPhoto.url}
-          alt=""
-          width={1672}
-          height={941}
-          className="absolute left-1/2 top-[52%] h-[78%] w-[116%] max-w-none -translate-x-1/2 object-cover object-[50%_66%] will-change-transform md:h-[88%] md:w-[108%]"
-          style={{ clipPath: "inset(43% 18% 3% 18% round 3rem)" }}
-        />
-      </div>
-
       <div ref={contentRef} className="container-page relative z-20 flex min-h-[680px] flex-col items-center justify-center py-20 text-center md:min-h-[760px] will-change-transform">
         <p className="eyebrow text-value">{siteSettings.tagline}</p>
         <h1 id="hero-heading" className="font-display mt-3 max-w-4xl text-6xl leading-[0.9] sm:text-7xl md:text-9xl">
