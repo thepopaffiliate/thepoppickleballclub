@@ -73,6 +73,8 @@ export const stories: Story[] = [
     ],
   },
   {
+    coverImageUrl: "/images/covers/cover-indoor-outdoor-balls.webp",
+    coverImageAlt: "Illustration: Two pickleballs on a green court, one with fewer larger holes and one with many smaller holes.",
     id: "s4",
     slug: "indoor-vs-outdoor-pickleballs",
     title: "Indoor vs. Outdoor Pickleballs: What's Actually Different?",
@@ -293,6 +295,8 @@ export const stories: Story[] = [
     ]
   },
   {
+    coverImageUrl: "/images/covers/cover-doubles-positioning.webp",
+    coverImageAlt: "Illustration: A top-down pickleball court with the kitchen line highlighted, showing two players moving toward the line.",
     id: "s5",
     slug: "pickleball-doubles-court-positioning",
     title: "Where Should You Stand in Doubles Pickleball? A Beginner's Guide to Court Positioning",
@@ -525,6 +529,8 @@ export const stories: Story[] = [
     ]
   },
   {
+    coverImageUrl: "/images/covers/cover-running-vs-court-shoes.webp",
+    coverImageAlt: "Illustration: A running shoe and a court shoe side by side on a pickleball court.",
     id: "s6",
     slug: "pickleball-running-shoes-vs-court-shoes",
     title: "Can You Play Pickleball in Running Shoes? What Your Footwear Actually Needs",
