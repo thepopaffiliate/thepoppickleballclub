@@ -84,8 +84,8 @@ export const stories: Story[] = [
     publishedAt: "2026-11-03",
     updatedAt: "2026-11-03",
     status: "published",
-    coverImageUrl: "",
-    coverImageAlt: "",
+    coverImageUrl: "/images/covers/cover-indoor-outdoor-balls.webp",
+    coverImageAlt: "Illustration: two pickleballs side by side on a green court, one with fewer large holes and one with many small holes.",
     relatedGearIds: [],
     content: [
       { type: "p", text: "You've probably seen pickleballs with 26 holes, others with 40, and some that look almost identical except for the brand printed on them." },
@@ -304,8 +304,8 @@ export const stories: Story[] = [
     publishedAt: "2026-11-03",
     updatedAt: "2026-11-03",
     status: "published",
-    coverImageUrl: "",
-    coverImageAlt: "",
+    coverImageUrl: "/images/covers/cover-doubles-positioning.webp",
+    coverImageAlt: "Illustration: top-down view of a pickleball court with the kitchen line highlighted and arrows showing two players moving toward it.",
     relatedGearIds: [],
     content: [
       { type: "p", text: "Ever played doubles pickleball and found yourself wondering why your partner is suddenly on the other side of the court?" },
@@ -538,8 +538,8 @@ export const stories: Story[] = [
     publishedAt: "2026-11-03",
     updatedAt: "2026-11-03",
     status: "published",
-    coverImageUrl: "",
-    coverImageAlt: "",
+    coverImageUrl: "/images/covers/cover-running-vs-court-shoes.webp",
+    coverImageAlt: "Illustration: a running shoe and a court shoe side by side on a court floor.",
     relatedGearIds: [],
     content: [
       { type: "p", text: "You've got your paddle, your balls, and a court reservation." },
