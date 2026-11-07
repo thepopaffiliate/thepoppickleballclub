@@ -86,16 +86,27 @@ function HeroParallax() {
       <div className="absolute inset-0 bg-gradient-to-b from-night/65 via-night/20 to-night/45" aria-hidden />
 
       <div ref={contentRef} className="container-page relative z-20 flex min-h-[680px] flex-col items-center justify-center py-20 text-center md:min-h-[760px] will-change-transform">
-        <p className="eyebrow text-value">{siteSettings.tagline}</p>
-        <h1 id="hero-heading" className="font-display mt-3 max-w-4xl text-6xl leading-[0.9] sm:text-7xl md:text-9xl">
-          Good gear.<br />Less <span className="text-primary">gastos.</span>
-        </h1>
-        <p className="mt-5 max-w-2xl text-lg opacity-90 md:text-xl">
-          Affordable pickleball finds, useful guides, at kung ano ang nangyayari sa Filipino pickleball scene.
-        </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link to="/gear-finder" className="btn btn-primary">Find your gear <ArrowRight className="size-4" aria-hidden /></Link>
-          <Link to="/stories" className="btn btn-outline text-night-foreground">Explore Latest Reads</Link>
+        <div className="max-w-5xl rounded-[2rem] bg-night/25 px-5 py-8 backdrop-blur-[2px] sm:px-8 md:px-12 md:py-10">
+          <p
+            className="text-sm font-bold uppercase tracking-[0.22em] text-primary md:text-base"
+            style={{ fontFamily: '"TAN Harmoni", "Recoleta", Georgia, serif', textShadow: "0 2px 12px rgba(0,0,0,.55)" }}
+          >
+            {siteSettings.tagline}
+          </p>
+          <h1
+            id="hero-heading"
+            className="mt-3 text-6xl leading-[0.92] text-white sm:text-7xl md:text-8xl lg:text-9xl"
+            style={{ fontFamily: '"Recoleta", "TAN Harmoni", Georgia, serif', textShadow: "0 4px 20px rgba(0,0,0,.7)" }}
+          >
+            Good gear.<br />Less <span className="text-primary">gastos.</span>
+          </h1>
+          <p className="mx-auto mt-5 max-w-2xl text-base font-medium text-white md:text-xl" style={{ textShadow: "0 2px 10px rgba(0,0,0,.75)" }}>
+            Affordable pickleball finds, useful guides, at kung ano ang nangyayari sa Filipino pickleball scene.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link to="/gear-finder" className="btn btn-primary">Find your gear <ArrowRight className="size-4" aria-hidden /></Link>
+            <Link to="/stories" className="btn btn-outline text-night-foreground">Explore Latest Reads</Link>
+          </div>
         </div>
       </div>
     </section>
