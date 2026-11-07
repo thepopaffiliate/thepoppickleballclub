@@ -9,6 +9,7 @@ import { visibleSocial } from "@/content/social";
 import { siteSettings } from "@/content/settings";
 import { Disclosure, GearCard, NewsCard, SocialCard, StoryCard, EmptyState } from "@/components/site/cards";
 import { Poll } from "@/components/site/interactive";
+import { PaddleParallax } from "@/components/site/paddle-parallax";
 import { pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
@@ -89,6 +90,8 @@ function Home() {
           </div>
         </div>
       </section>
+
+      <PaddleParallax />
 
       <section className="container-page mt-16">
         <SectionHead eyebrow="Budget Finds" title="Featured sulit finds" to="/gear" cta="All gear" />
