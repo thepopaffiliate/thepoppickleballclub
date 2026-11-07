@@ -3,7 +3,7 @@ import { applyFinderChoice, getPriorityOptions, matchGear, suggestAlternatives }
 import { isPriceStale, formatPHP } from "@/lib/format";
 import { gear, getGearByIds } from "@/content/gear";
 import { finderCategories, gearFinderConfig } from "@/content/gear-config";
-import { getAffiliateDestination, getReviewLabel, hasVerifiedPrice } from "@/lib/product-data";
+import { getAffiliateDestination, getHandsOnTestingContext, getReviewLabel, hasVerifiedPrice } from "@/lib/product-data";
 import { isSourcedNews, news, visibleNews } from "@/content/news";
 import type { Gear } from "@/content/types";
 
@@ -103,10 +103,57 @@ describe("Product evidence and affiliate destinations", () => {
     expect(getAffiliateDestination(g, "gear_detail")).toBeNull();
   });
 
-  it("does not imply research or testing without editorial evidence", () => {
+  it("does not infer hands-on testing from a review note", () => {
     expect(getReviewLabel({ ...fixture, reviewStatus: "tested" })).toBe("Not yet reviewed");
-    expect(getReviewLabel({ ...fixture, reviewStatus: "tested", reviewNote: "Test fixture evidence" })).toBe("Tested");
+    expect(getReviewLabel({ ...fixture, reviewStatus: "tested", reviewNote: "Test fixture evidence" })).toBe("Not yet reviewed");
+  });
+
+  it("does not infer hands-on testing from verified specifications", () => {
+    const g: Gear = { ...fixture, reviewStatus: "tested", reviewNote: "Specifications checked", verifiedSpecs: [{ label: "Fixture spec", value: "Fixture value" }] };
+    expect(getReviewLabel(g)).toBe("Not yet reviewed");
+    expect(getHandsOnTestingContext(g)).toBeNull();
+  });
+
+  it.each(["", " \t\n "])("rejects empty or whitespace-only hands-on context %j", (context) => {
+    const g: Gear = { ...fixture, reviewStatus: "tested", reviewNote: "Test fixture evidence", handsOnTesting: { context } };
+    expect(getReviewLabel(g)).toBe("Not yet reviewed");
+    expect(getHandsOnTestingContext(g)).toBeNull();
+  });
+
+  it("requires explicit hands-on context for Tested and makes that context available", () => {
+    const context = "Test fixture only: editor used the paddle during two doubles sessions.";
+    const g: Gear = { ...fixture, reviewStatus: "tested", reviewNote: "Test fixture evidence", handsOnTesting: { context } };
+    expect(getReviewLabel(g)).toBe("Tested");
+    expect(getHandsOnTestingContext(g)).toBe(context);
+  });
+
+  it.each(["demo", "draft"] as const)("never labels %s records Tested even with hands-on context", (status) => {
+    const g: Gear = { ...fixture, status, reviewStatus: "tested", reviewNote: "Test fixture evidence", handsOnTesting: { context: "Test fixture hands-on session" } };
+    expect(getReviewLabel(g)).toBe("Not yet reviewed");
+    expect(getHandsOnTestingContext(g)).toBeNull();
+  });
+
+  it.each([undefined, "", " \t\n "])("preserves the nonblank review-note requirement %j", (reviewNote) => {
+    const g: Gear = { ...fixture, reviewStatus: "tested", handsOnTesting: { context: "Test fixture hands-on session" } };
+    if (reviewNote === undefined) delete g.reviewNote;
+    else g.reviewNote = reviewNote;
+    expect(getReviewLabel(g)).toBe("Not yet reviewed");
+    expect(getHandsOnTestingContext(g)).toBeNull();
+  });
+
+  it("keeps research distinct from hands-on testing even when context exists", () => {
     expect(getReviewLabel({ ...fixture, reviewStatus: "researched", reviewNote: "Test fixture evidence" })).toBe("Researched");
+    const g: Gear = { ...fixture, reviewStatus: "researched", reviewNote: "Test fixture evidence", handsOnTesting: { context: "Test fixture hands-on session" } };
+    expect(getReviewLabel(g)).toBe("Researched");
+    expect(getHandsOnTestingContext(g)).toBeNull();
+  });
+
+  it("requires an explicit tested status as well as hands-on context", () => {
+    const g: Gear = { ...fixture, reviewNote: "Test fixture evidence", handsOnTesting: { context: "Test fixture hands-on session" } };
+    delete g.reviewStatus;
+    expect(getReviewLabel(g)).toBe("Not yet reviewed");
+    expect(getReviewLabel({ ...g, reviewStatus: "not-reviewed" })).toBe("Not yet reviewed");
+    expect(getHandsOnTestingContext({ ...g, reviewStatus: "not-reviewed" })).toBeNull();
   });
 });
 

@@ -6,7 +6,7 @@ import { storiesForGear } from "@/content/stories";
 import { siteSettings } from "@/content/settings";
 import { Breadcrumbs } from "@/components/site/layout";
 import { DemoBadge, Disclosure, PriceInfo, ProductButton, StoryCard } from "@/components/site/cards";
-import { getReviewLabel } from "@/lib/product-data";
+import { getHandsOnTestingContext, getReviewLabel } from "@/lib/product-data";
 import { pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/gear/$slug")({
@@ -34,6 +34,7 @@ export const Route = createFileRoute("/gear/$slug")({
 function GearDetail() {
   const { g } = Route.useLoaderData();
   const related = storiesForGear(g.id);
+  const handsOnTestingContext = getHandsOnTestingContext(g);
   return (
     <article className="container-page py-8">
       <Breadcrumbs items={[{ label: "Gear", to: "/gear" }, { label: g.name }]} />
@@ -66,6 +67,10 @@ function GearDetail() {
           </ul>
 
           {g.reviewNote && g.status === "published" && <p className="mt-4 text-sm text-muted-foreground">{g.reviewNote}</p>}
+          {handsOnTestingContext && <>
+            <h2 className="font-ui mt-6 font-bold">Hands-on testing</h2>
+            <p className="mt-2 text-sm text-muted-foreground">{handsOnTestingContext}</p>
+          </>}
           <h2 className="font-ui mt-8 font-bold">Verified specifications</h2>
           {!g.verifiedSpecs?.length && <p className="mt-2 text-sm text-muted-foreground">Specifications not yet verified.</p>}
           {g.verifiedSpecs?.length ? <dl className="mt-3 divide-y rounded-xl border">

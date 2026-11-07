@@ -1,5 +1,10 @@
 # Scoped owner-approved update
 
+## Current small evidence pass
+- [x] Audit the existing product evidence model, helper, detail page and tests.
+- [x] Require explicit hands-on context for “Tested” without changing products, other content or safety rules.
+- [x] Run the full test suite and report exact results and changed files; do not publish.
+
 - [x] Category-first Gear Finder with six categories and four provisional budget choices per category.
 - [x] Approved-only, category-safe matching and no-match behavior.
 - [x] Latest Reads / What's Happening labels and sourcing separation.

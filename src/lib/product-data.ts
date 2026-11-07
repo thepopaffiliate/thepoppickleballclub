@@ -17,7 +17,15 @@ export function getAffiliateDestination(g: Gear, channel: string) {
   return safeExternalUrl(g.affiliateDestinations?.[channel] ?? g.shopeeAffiliateUrl);
 }
 
+/** Dedicated hands-on context is required in addition to the existing editorial gates. */
+export function getHandsOnTestingContext(g: Gear): string | null {
+  if (g.status !== "published" || g.reviewStatus !== "tested" || !g.reviewNote?.trim()) return null;
+  const context = g.handsOnTesting?.context;
+  return context?.trim() ? context : null;
+}
+
 export function getReviewLabel(g: Gear) {
   if (g.status !== "published" || !g.reviewNote?.trim()) return "Not yet reviewed";
-  return g.reviewStatus === "tested" ? "Tested" : g.reviewStatus === "researched" ? "Researched" : "Not yet reviewed";
+  if (g.reviewStatus === "tested") return getHandsOnTestingContext(g) ? "Tested" : "Not yet reviewed";
+  return g.reviewStatus === "researched" ? "Researched" : "Not yet reviewed";
 }

@@ -27,6 +27,8 @@ export interface Gear {
   intendedUser?: string;
   reviewStatus?: "not-reviewed" | "researched" | "tested";
   reviewNote?: string;
+  /** Record actual hands-on use only; research, specifications and review notes are not testing evidence. */
+  handsOnTesting?: { context: string };
   /** Editor-entered only. Leave empty if not reviewed. */
   pros: string[];
   cons: string[];
