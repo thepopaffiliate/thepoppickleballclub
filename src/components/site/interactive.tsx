@@ -5,34 +5,80 @@ import type { SocialPlatform } from "@/content/types";
 import { track } from "@/lib/analytics";
 import { safeExternalUrl } from "@/lib/url-safety";
 
+const socialDisplayNames: Record<SocialPlatform, string> = {
+  facebook: "The Pop. Pickleball Club",
+  instagram: "@the_poppickleball",
+  "shopee-video": "soon",
+  tiktok: "@thepoppickleballclub",
+};
+
+function SocialIcon({ platform }: { platform: SocialPlatform }) {
+  if (platform === "facebook") {
+    return (
+      <svg viewBox="0 0 24 24" className="size-5" aria-hidden="true" fill="currentColor">
+        <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.6-1.6h1.7V4.8c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V11H7.4v3h2.7v8h3.4Z" />
+      </svg>
+    );
+  }
+
+  if (platform === "instagram") {
+    return (
+      <svg viewBox="0 0 24 24" className="size-5" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17.3" cy="6.8" r="1" fill="currentColor" stroke="none" />
+      </svg>
+    );
+  }
+
+  if (platform === "tiktok") {
+    return (
+      <svg viewBox="0 0 24 24" className="size-5" aria-hidden="true" fill="currentColor">
+        <path d="M15.4 3c.3 2.1 1.5 3.4 3.6 3.6v2.9c-1.5 0-2.7-.4-3.7-1.1v5.8c0 3.6-2.2 5.8-5.5 5.8A5.2 5.2 0 0 1 4.5 15c0-3.1 2.4-5.3 5.4-5.3.4 0 .8 0 1.2.1v3c-.4-.1-.7-.2-1.1-.2-1.3 0-2.4.9-2.4 2.3 0 1.3 1 2.3 2.3 2.3 1.5 0 2.4-1 2.4-2.8V3h3.1Z" />
+      </svg>
+    );
+  }
+
+  return null;
+}
+
 export function SocialLinks({ tone = "light" }: { tone?: "light" | "dark" }) {
   const entries = Object.entries(siteSettings.socials) as [SocialPlatform, string][];
   const configured = entries.filter(([, url]) => safeExternalUrl(url));
+
   return (
     <div>
-      <ul className="flex flex-wrap gap-2">
-        {entries.map(([platform, url]) => (
-          <li key={platform}>
-            {safeExternalUrl(url) ? (
-              <a
-                href={safeExternalUrl(url)!}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => track("social_outbound_click", { platform, placement: "profile" })}
-                className={`btn btn-outline min-h-10 py-1.5 text-sm ${tone === "dark" ? "text-night-foreground" : "text-foreground"}`}
-              >
-                {platformLabels[platform]} <ExternalLink className="size-3" aria-hidden />
-              </a>
-            ) : (
-              <span
-                className={`chip py-2 ${tone === "dark" ? "bg-night-foreground/10 text-night-foreground/70" : "bg-muted text-muted-foreground"}`}
-                title="Profile link not added yet"
-              >
-                {platformLabels[platform]} · soon
-              </span>
-            )}
-          </li>
-        ))}
+      <ul className="flex flex-wrap gap-x-5 gap-y-3">
+        {entries.map(([platform, url]) => {
+          const safeUrl = safeExternalUrl(url);
+          const label = socialDisplayNames[platform];
+
+          return (
+            <li key={platform}>
+              {safeUrl ? (
+                <a
+                  href={safeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => track("social_outbound_click", { platform, placement: "profile" })}
+                  className={`inline-flex items-center gap-2 text-sm font-semibold transition-opacity hover:opacity-75 ${tone === "dark" ? "text-night-foreground" : "text-foreground"}`}
+                  aria-label={`Open The Pop. on ${platform}`}
+                >
+                  <SocialIcon platform={platform} />
+                  <span>{label}</span>
+                </a>
+              ) : (
+                <span
+                  className={`inline-flex items-center gap-2 text-sm font-semibold ${tone === "dark" ? "text-night-foreground/45" : "text-muted-foreground"}`}
+                  title="Profile link not added yet"
+                >
+                  <span className="opacity-70"><SocialIcon platform={platform} /></span>
+                  <span>Shopee Video · soon</span>
+                </span>
+              )}
+            </li>
+          );
+        })}
       </ul>
       {configured.length === 0 && (
         <p className={`mt-2 text-xs ${tone === "dark" ? "opacity-60" : "text-muted-foreground"}`}>Social profile links will appear here once added.</p>
