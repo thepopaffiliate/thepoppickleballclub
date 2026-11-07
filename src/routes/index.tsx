@@ -83,10 +83,11 @@ function HeroParallax() {
         fetchPriority="high"
         className="absolute inset-0 h-full w-full scale-[1.04] object-cover object-[50%_62%] will-change-transform"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-night/65 via-night/20 to-night/45" aria-hidden />
+      <div className="absolute inset-0 bg-night/10 backdrop-blur-[4px]" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-b from-night/55 via-night/15 to-night/35" aria-hidden />
 
       <div ref={contentRef} className="container-page relative z-20 flex min-h-[680px] flex-col items-center justify-center py-20 text-center md:min-h-[760px] will-change-transform">
-        <div className="max-w-5xl rounded-[2rem] bg-night/25 px-5 py-8 backdrop-blur-[2px] sm:px-8 md:px-12 md:py-10">
+        <div className="max-w-5xl px-5 py-8 sm:px-8 md:px-12 md:py-10">
           <p
             className="text-sm font-bold uppercase tracking-[0.22em] text-value md:text-base"
             style={{ fontFamily: '"TAN Harmoni", "Recoleta", Georgia, serif', textShadow: "0 2px 12px rgba(0,0,0,.55)" }}
