@@ -8,7 +8,6 @@ import { safeExternalUrl } from "@/lib/url-safety";
 const socialDisplayNames: Record<SocialPlatform, string> = {
   facebook: "The Pop. Pickleball Club",
   instagram: "@the_poppickleball",
-  "shopee-video": "soon",
   tiktok: "@thepoppickleballclub",
 };
 
@@ -52,6 +51,8 @@ export function SocialLinks({ tone = "light" }: { tone?: "light" | "dark" }) {
         {entries.map(([platform, url]) => {
           const safeUrl = safeExternalUrl(url);
           const label = socialDisplayNames[platform];
+
+          if (platform === "shopee-video") return null;
 
           return (
             <li key={platform}>
