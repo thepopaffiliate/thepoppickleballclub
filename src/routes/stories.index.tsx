@@ -29,7 +29,7 @@ function LatestReads() {
           </select>
         </label>
         {reads.length ? (
-          <div className="grid gap-5 md:grid-cols-3">{reads.map((s) => <StoryCard key={s.id} s={s} />)}</div>
+          <div className="-mx-5 flex snap-x gap-4 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0">{reads.map((s) => <div key={s.id} className="w-[82vw] max-w-[360px] shrink-0 snap-start md:w-auto md:max-w-none"><StoryCard s={s} /></div>)}</div>
         ) : <EmptyState title="No stories yet" />}
       </div>
     </>
