@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import community from "@/assets/community-court.jpg";
+import communityAsset from "@/assets/pop-pickleball-club.jpg.asset.json";
 import { PageIntro } from "@/components/site/layout";
 import { Poll, SocialLinks, SuggestForm } from "@/components/site/interactive";
 import { pageMeta } from "@/lib/seo";
@@ -31,7 +31,7 @@ function Community() {
         <div className="mt-6"><SocialLinks /></div>
       </section>
       <section className="container-page mt-12 grid gap-8 md:grid-cols-2 md:items-start">
-        <img src={community} alt="Players chatting beside a covered community court" width={1200} height={800} loading="lazy" className="rounded-3xl" />
+        <img src={communityAsset.url} alt="Pop Pickleball Club logo with crossed pink paddles and a green pickleball" width={851} height={315} loading="lazy" className="rounded-3xl" />
         <SuggestForm />
       </section>
     </>
