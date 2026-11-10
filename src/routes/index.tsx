@@ -6,9 +6,8 @@ import { visibleGear } from "@/content/gear";
 import { gearFinderConfig, finderCategories } from "@/content/gear-config";
 import { visibleStories } from "@/content/stories";
 import { visibleNews } from "@/content/news";
-import { visibleSocial } from "@/content/social";
 import { siteSettings } from "@/content/settings";
-import { Disclosure, GearCard, NewsCard, SocialCard, StoryCard, EmptyState } from "@/components/site/cards";
+import { Disclosure, GearCard, NewsCard, StoryCard, EmptyState } from "@/components/site/cards";
 import { Poll } from "@/components/site/interactive";
 import { pageMeta } from "@/lib/seo";
 
@@ -188,9 +187,10 @@ function Home() {
       <section className="mt-20 bg-blush py-14" aria-labelledby="social-h">
         <div className="container-page">
           <p className="eyebrow text-primary-strong">From our socials</p>
-          <h2 id="social-h" className="font-display text-4xl md:text-5xl">Reels, carousels & videos</h2>
-          <div className="-mx-5 mt-6 flex snap-x gap-4 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:grid-cols-3 md:px-0">
-            {visibleSocial.map((p) => <SocialCard key={p.id} p={p} />)}
+          <h2 id="social-h" className="font-display text-4xl md:text-5xl">Media</h2>
+          <div className="mt-6 rounded-2xl border-2 border-dashed bg-background/60 p-10 text-center">
+            <p className="font-display text-3xl">No media available at the moment.</p>
+            <p className="mt-2 text-muted-foreground">We’ll add real content here when it’s ready.</p>
           </div>
         </div>
       </section>
