@@ -53,7 +53,7 @@ function Community() {
         <ul className="mt-4 grid gap-3 md:grid-cols-3">
           {prompts.map((p) => <li key={p} className="rounded-2xl bg-ice p-5 font-ui font-semibold">{p}</li>)}
         </ul>
-        <div className="mt-6"><SocialLinks /></div>
+        <div className="mt-6 flex justify-center"><SocialLinks /></div>
       </section>
 
       <section className="container-page mt-12">
