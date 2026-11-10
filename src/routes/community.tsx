@@ -20,7 +20,7 @@ function Community() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-blush" aria-labelledby="community-h">
+      <section className="relative overflow-hidden bg-blush" aria-label="Pop Pickleball Club">
         {heroSrc && (
           <img
             src={heroSrc}
@@ -28,24 +28,19 @@ function Community() {
             width={851}
             height={315}
             fetchPriority="high"
-            className="absolute inset-0 h-full w-full object-contain object-center"
+            className="block h-auto w-full object-contain object-center"
           />
         )}
+      </section>
 
-        <div className="container-page relative z-10 py-12 text-center md:py-20">
-          <p className="eyebrow inline-block rounded-full bg-blush/90 px-3 py-1 text-primary-strong">Court Community</p>
-          <h1
-            id="community-h"
-            className="font-display mt-3 text-5xl md:text-7xl [text-shadow:0_0_22px_rgba(255,240,245,.95),0_0_6px_rgba(255,240,245,.9)]"
-          >
-            Community
-          </h1>
-          <p className="mx-auto mt-4 max-w-xl text-lg font-medium text-muted-foreground">
-            <span className="rounded bg-blush/90 px-2 py-0.5 [box-decoration-break:clone]">
-              Prompts and polls para sa mga mahilig maglaro. Continue the kwentuhan on our socials.
-            </span>
-          </p>
-        </div>
+      <section className="container-page py-10 text-center md:py-14" aria-labelledby="community-h">
+        <p className="eyebrow text-primary-strong">Court Community</p>
+        <h1 id="community-h" className="font-display mt-2 text-5xl md:text-7xl">
+          Community
+        </h1>
+        <p className="mx-auto mt-3 max-w-2xl text-lg text-muted-foreground">
+          Prompts and polls para sa mga mahilig maglaro. Continue the kwentuhan on our socials.
+        </p>
       </section>
 
       <div className="container-page mt-8 grid gap-8 md:grid-cols-2">
