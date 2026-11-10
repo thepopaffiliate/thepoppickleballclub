@@ -165,8 +165,12 @@ function Home() {
       <section className="container-page mt-20">
         <SectionHead eyebrow="Buying Guides & Comparisons" title="Latest Reads" to="/stories" cta="All reads" />
         {visibleStories.length ? (
-          <div className="grid gap-5 md:grid-cols-3">
-            {visibleStories.slice(0, 3).map((s) => <StoryCard key={s.id} s={s} />)}
+          <div className="-mx-5 flex snap-x gap-4 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0">
+            {visibleStories.slice(0, 3).map((s) => (
+              <div key={s.id} className="w-[82vw] max-w-[360px] shrink-0 snap-start md:w-auto md:max-w-none">
+                <StoryCard s={s} />
+              </div>
+            ))}
           </div>
         ) : (
           <EmptyState title="First reads are on the way" />
@@ -176,8 +180,12 @@ function Home() {
       <section className="container-page mt-20">
         <SectionHead eyebrow="News, Events & Community" title="What's Happening" to="/news" cta="All updates" />
         {visibleNews.length ? (
-          <div className="grid gap-5 md:grid-cols-2">
-            {visibleNews.slice(0, 2).map((n) => <NewsCard key={n.id} n={n} />)}
+          <div className="-mx-5 flex snap-x gap-4 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 md:pb-0">
+            {visibleNews.slice(0, 2).map((n) => (
+              <div key={n.id} className="w-[82vw] max-w-[420px] shrink-0 snap-start md:w-auto md:max-w-none">
+                <NewsCard n={n} />
+              </div>
+            ))}
           </div>
         ) : (
           <EmptyState title="No sourced stories yet" />
