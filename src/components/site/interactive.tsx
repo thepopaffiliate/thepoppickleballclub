@@ -9,6 +9,7 @@ const socialDisplayNames: Record<SocialPlatform, string> = {
   facebook: "The Pop. Pickleball Club",
   instagram: "@the_poppickleball",
   tiktok: "@thepoppickleballclub",
+  "shopee-video": "Shopee Video",
 };
 
 function SocialIcon({ platform }: { platform: SocialPlatform }) {
