@@ -116,25 +116,52 @@ export function Poll({ question, options }: { question: string; options: string[
   );
 }
 
-const backendConfigured = false; // Flip when a real submission endpoint exists.
+const backendConfigured = true; // Delivered via FormSubmit to the owner inbox.
+const SUGGEST_ENDPOINT = "https://formsubmit.co/ajax/thepopaffiliate@gmail.com";
 
 export function SuggestForm() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const [sending, setSending] = useState(false);
   return (
     <form
       className="space-y-4 rounded-2xl border bg-card p-5 shadow-card"
       noValidate
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        const data = new FormData(e.currentTarget);
+        if (sending) return;
+        const form = e.currentTarget;
+        const data = new FormData(form);
         const topic = String(data.get("topic") ?? "").trim();
         const url = String(data.get("url") ?? "").trim();
+        const message = String(data.get("message") ?? "").trim();
         if (!topic) return setError("Please add a topic.");
         if (url && !/^https?:\/\/\S+$/i.test(url)) return setError("Source URL should start with http:// or https://");
         setError("");
-        setSubmitted(true);
-        e.currentTarget.reset();
+        setSubmitted(false);
+        setSending(true);
+        try {
+          const res = await fetch(SUGGEST_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify({
+              _subject: topic,
+              _template: "box",
+              _captcha: "false",
+              Topic: topic,
+              "Source URL": url || "(none)",
+              Message: message || "(none)",
+            }),
+          });
+          const json = (await res.json().catch(() => ({}))) as { success?: string | boolean };
+          if (!res.ok || String(json.success) !== "true") throw new Error("send failed");
+          setSubmitted(true);
+          form.reset();
+        } catch {
+          setError("Sorry, your suggestion couldn't be sent. Please try again or message us on our socials.");
+        } finally {
+          setSending(false);
+        }
       }}
     >
       <div>
@@ -158,11 +185,11 @@ export function SuggestForm() {
         <textarea name="message" rows={3} maxLength={1000} className="mt-1 w-full rounded-lg border border-input bg-background px-3 py-2.5" />
       </label>
       {error && <p role="alert" className="text-sm font-semibold text-destructive">{error}</p>}
-      <button type="submit" className="btn btn-primary w-full sm:w-auto">Submit suggestion</button>
+      <button type="submit" disabled={sending} aria-busy={sending} className="btn btn-primary w-full sm:w-auto disabled:opacity-60">{sending ? "Sending…" : "Submit suggestion"}</button>
       {submitted && (
         <p role="status" className="flex items-start gap-2 text-sm">
           <CheckCircle2 className="size-4 mt-0.5 text-value-strong" aria-hidden />
-          {backendConfigured ? "Salamat! We received your suggestion." : "Thanks! This is a demo, so nothing was sent — your suggestion was not saved."}
+          {backendConfigured ? "Thanks! Your suggestion has been sent to The Pop." : "Thanks! This is a demo, so nothing was sent — your suggestion was not saved."}
         </p>
       )}
     </form>
